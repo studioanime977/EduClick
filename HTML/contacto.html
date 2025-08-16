@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contacto - EduClick</title>
+  <link rel="icon" type="image/x-icon" href="../img/favicon.ico" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { 
+      margin: 0; 
+      padding: 0; 
+      box-sizing: border-box; 
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+      background: #f8f9fa;
+    }
+    
+    /* Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #667eea;
+      text-decoration: none;
+    }
+    
+    .logo i {
+      font-size: 2rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-links a:hover, .nav-links a.active {
+      color: #667eea;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after, .nav-links a.active::after {
+      width: 100%;
+    }
+    
+    .btn {
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+    
+    .btn-outline {
+      color: #667eea;
+      border-color: #667eea;
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: #667eea;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #5a67d8, #6b46c1);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Main Content */
+    .main-content {
+      margin-top: 100px;
+      padding: 2rem;
+    }
+    
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+      padding: 4rem 2rem;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .hero-section p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Contact Grid */
+    .contact-section {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .contact-card {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 2.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+      border: 3px solid transparent;
+    }
+    
+    .contact-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+      border-color: #667eea;
+    }
+    
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1.5rem;
+      color: white;
+      font-size: 2rem;
+    }
+    
+    .contact-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    
+    .contact-description {
+      color: #666;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+    }
+    
+    .contact-link {
+      display: inline-block;
+      padding: 1rem 2rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      font-size: 1.1rem;
+    }
+    
+    .contact-link:hover {
+      background: linear-gradient(45deg, #5a67d8, #6b46c1);
+      transform: translateY(-2px);
+      color: white;
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    .contact-link i {
+      margin-right: 0.5rem;
+    }
+    
+    /* FAQ Section */
+    .faq-section {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .faq-item {
+      border-bottom: 1px solid #e9ecef;
+      padding: 1.5rem 0;
+    }
+    
+    .faq-item:last-child {
+      border-bottom: none;
+    }
+    
+    .faq-question {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: color 0.3s ease;
+    }
+    
+    .faq-question:hover {
+      color: #667eea;
+    }
+    
+    .faq-question i {
+      transition: transform 0.3s ease;
+    }
+    
+    .faq-question.active i {
+      transform: rotate(180deg);
+    }
+    
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .faq-answer.active {
+      max-height: 200px;
+      padding-top: 1rem;
+    }
+    
+    /* Social Links */
+    .social-section {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .social-link {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.5rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    
+    .social-link:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+      color: white;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .social-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="../index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        EduClick
+      </a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Inicio</a></li>
+        <li><a href="cursos.html">Cursos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="../finanzas.html">Plan Financiero</a></li>
+        <li><a href="../simulacion-pagos.html">Pagos</a></li>
+        <li><a href="contacto.html" class="active">Contacto</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="login.html" class="btn btn-outline">Iniciar Sesión</a>
+        <a href="registro.html" class="btn btn-primary">Registrarse</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>Contáctanos</h1>
+      <p>¿Tienes preguntas sobre EduClick? Estamos aquí para ayudarte. Únete a nuestra comunidad o escríbenos directamente.</p>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+      <div class="container">
+        <h2 class="section-title">¿Cómo podemos ayudarte?</h2>
+        <p class="section-subtitle">Elige la opción que mejor se adapte a tu consulta</p>
+        
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="contact-title">Comunidad WhatsApp</div>
+            <div class="contact-description">
+              Únete a nuestra comunidad de más de 500 estudiantes y profesores. Comparte dudas, proyectos y conecta con otros aprendices de tecnología.
+            </div>
+            <a href="https://chat.whatsapp.com/GCLwf4OpLvO9hqi7xyUqp7?mode=ac_t" target="_blank" class="contact-link">
+              <i class="fab fa-whatsapp"></i> Unirse al Grupo
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-title">Correo Electrónico</div>
+            <div class="contact-description">
+              Escríbenos para soporte técnico, consultas sobre cursos, problemas de facturación o cualquier pregunta que tengas sobre EduClick.
+            </div>
+            <a href="mailto:educlick6@gmail.com" class="contact-link">
+              <i class="fas fa-envelope"></i> Enviar Email
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="contact-title">Soporte Técnico</div>
+            <div class="contact-description">
+              ¿Problemas para acceder a tu cuenta o reproducir videos? Nuestro equipo técnico te ayudará a resolver cualquier inconveniente.
+            </div>
+            <a href="mailto:educlick6@gmail.com?subject=Soporte Técnico - Ayuda Urgente" class="contact-link">
+              <i class="fas fa-tools"></i> Obtener Ayuda
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-chalkboard-teacher"></i>
+            </div>
+            <div class="contact-title">Ser Instructor</div>
+            <div class="contact-description">
+              ¿Tienes conocimientos en tecnología y quieres compartirlos? Únete como instructor y forma parte de nuestra comunidad educativa.
+            </div>
+            <a href="mailto:educlick6@gmail.com?subject=Quiero ser Instructor en EduClick" class="contact-link">
+              <i class="fas fa-user-plus"></i> Aplicar Ahora
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-building"></i>
+            </div>
+            <div class="contact-title">Empresas</div>
+            <div class="contact-description">
+              Planes corporativos para capacitar a tu equipo. Descuentos especiales para grupos y certificaciones empresariales.
+            </div>
+            <a href="mailto:educlick6@gmail.com?subject=Plan Corporativo - Consulta Empresarial" class="contact-link">
+              <i class="fas fa-handshake"></i> Consultar Planes
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="contact-title">Estudiantes</div>
+            <div class="contact-description">
+              ¿Dudas sobre tu suscripción, certificados o progreso en los cursos? Te ayudamos a aprovechar al máximo tu experiencia de aprendizaje.
+            </div>
+            <a href="mailto:educlick6@gmail.com?subject=Consulta de Estudiante" class="contact-link">
+              <i class="fas fa-question-circle"></i> Hacer Consulta
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+      <div class="container">
+        <h2 class="section-title">Preguntas Frecuentes</h2>
+        <p class="section-subtitle">Encuentra respuestas rápidas a las consultas más comunes</p>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            ¿Cómo puedo acceder a los cursos después de suscribirme?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Después de completar tu suscripción, recibirás un email de confirmación. Inicia sesión en tu cuenta y ve a "Mi Dashboard" donde encontrarás todos los cursos disponibles según tu plan.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            ¿Puedo cancelar mi suscripción en cualquier momento?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Sí, puedes cancelar tu suscripción en cualquier momento desde tu perfil. Mantendrás acceso hasta el final de tu período de facturación actual.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            ¿Los certificados tienen validez profesional?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Sí, nuestros certificados son verificables digitalmente y reconocidos por empresas tecnológicas en Latinoamérica. Incluyen un código único de verificación.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            ¿Hay descuentos para estudiantes o grupos?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Ofrecemos descuentos del 17% en planes anuales y descuentos especiales para grupos de 5+ personas. Contáctanos para planes corporativos personalizados.
+          </div>
+        </div>
+        
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            ¿Puedo descargar los videos para verlos offline?
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            La descarga offline está disponible en el Plan Avanzado. Los videos se pueden descargar en la app móvil para verlos sin conexión a internet.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Section -->
+    <section class="social-section">
+      <div class="container">
+        <h2 class="section-title">Síguenos en Redes Sociales</h2>
+        <p class="section-subtitle">Mantente al día con las últimas noticias, tips y contenido exclusivo</p>
+        
+        <div class="social-links">
+          <a href="#" class="social-link" title="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+          <a href="#" class="social-link" title="Twitter">
+            <i class="fab fa-twitter"></i>
+          </a>
+          <a href="#" class="social-link" title="LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+          <a href="#" class="social-link" title="YouTube">
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="#" class="social-link" title="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="#" class="social-link" title="TikTok">
+            <i class="fab fa-tiktok"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // FAQ Toggle functionality
+    function toggleFAQ(element) {
+      const answer = element.nextElementSibling;
+      const icon = element.querySelector('i');
+      
+      // Close all other FAQs
+      document.querySelectorAll('.faq-question').forEach(q => {
+        if (q !== element) {
+          q.classList.remove('active');
+          q.nextElementSibling.classList.remove('active');
+          q.querySelector('i').style.transform = 'rotate(0deg)';
+        }
+      });
+      
+      // Toggle current FAQ
+      element.classList.toggle('active');
+      answer.classList.toggle('active');
+      
+      if (element.classList.contains('active')) {
+        icon.style.transform = 'rotate(180deg)';
+      } else {
+        icon.style.transform = 'rotate(0deg)';
+      }
+    }
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Header background on scroll
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+      }
+    });
+
+    // Add click tracking for contact links
+    document.querySelectorAll('.contact-link').forEach(link => {
+      link.addEventListener('click', function() {
+        console.log('Contact method used:', this.textContent.trim());
+      });
+    });
+  </script>
+</body>
+</html>

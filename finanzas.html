@@ -21,221 +21,802 @@
       overflow-x: hidden;
       background: #f8f9fa;
     }
+    
+    /* Header */
     header {
-      background-color: #1e1e1e;
-      padding: 15px;
-      text-align: center;
-      font-size: 1.2em;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
     }
-    header a {
-      color: #ffcc00;
-      margin: 0 10px;
+    
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #667eea;
       text-decoration: none;
     }
-    h1, h2 {
+    
+    .logo i {
+      font-size: 2rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .nav-links {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+    
+    .nav-links a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+      position: relative;
+    }
+    
+    .nav-links a:hover, .nav-links a.active {
+      color: #667eea;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      transition: width 0.3s ease;
+    }
+    
+    .nav-links a:hover::after, .nav-links a.active::after {
+      width: 100%;
+    }
+    
+    .btn {
+      padding: 0.5rem 1.5rem;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      cursor: pointer;
+    }
+    
+    .btn-outline {
+      color: #667eea;
+      border-color: #667eea;
+      background: transparent;
+    }
+    
+    .btn-outline:hover {
+      background: #667eea;
+      color: white;
+    }
+    
+    .btn-primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+    
+    .btn-primary:hover {
+      background: linear-gradient(45deg, #5a67d8, #6b46c1);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* Main Content */
+    .main-content {
+      margin-top: 100px;
+      padding: 2rem;
+    }
+    
+    .hero-section {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
       text-align: center;
-      color: #ffcc00;
+      padding: 4rem 2rem;
+      border-radius: 20px;
+      margin-bottom: 3rem;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    table {
-      width: 95%;
-      margin: 20px auto;
-      border-collapse: collapse;
-      background-color: #1e1e1e;
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    
+    .hero-section h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
     }
-    th, td {
-      padding: 10px;
-      border: 1px solid #333;
+    
+    .hero-section p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .section-title {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      font-size: 1.1rem;
+      color: #666;
+      margin-bottom: 3rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    /* Pricing Plans */
+    .pricing-section {
+      margin-bottom: 4rem;
+    }
+    
+    .pricing-toggle {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    
+    .toggle-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      background: white;
+      padding: 0.5rem;
+      border-radius: 50px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .toggle-option {
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+    
+    .toggle-option.active {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+    
+    .discount-badge {
+      background: #28a745;
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 15px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .pricing-card {
+      background: white;
+      border-radius: 20px;
+      padding: 2.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .pricing-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+    
+    .pricing-card.featured {
+      border: 3px solid #667eea;
+      transform: scale(1.05);
+    }
+    
+    .pricing-card.featured::before {
+      content: 'MÁS POPULAR';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      text-align: center;
+      padding: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .plan-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .plan-description {
+      color: #666;
+      margin-bottom: 2rem;
+    }
+    
+    .plan-price {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+    
+    .price-amount {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+    
+    .price-currency {
+      font-size: 1.2rem;
+      color: #666;
+    }
+    
+    .price-period {
+      font-size: 1rem;
+      color: #666;
+    }
+    
+    .savings {
+      background: #28a745;
+      color: white;
+      padding: 0.25rem 0.5rem;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      margin-top: 0.5rem;
+    }
+    
+    .plan-features {
+      list-style: none;
+      margin-bottom: 2rem;
+    }
+    
+    .plan-features li {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      color: #555;
+    }
+    
+    .plan-features i {
+      color: #28a745;
+      font-size: 1.1rem;
+    }
+    
+    .plan-button {
+      width: 100%;
+      padding: 1rem;
+      border: none;
+      border-radius: 10px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-align: center;
+      display: block;
+    }
+    
+    .plan-button.primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+    
+    .plan-button.primary:hover {
+      background: linear-gradient(45deg, #5a67d8, #6b46c1);
+      transform: translateY(-2px);
+    }
+    
+    .plan-button.secondary {
+      background: transparent;
+      color: #667eea;
+      border: 2px solid #667eea;
+    }
+    
+    .plan-button.secondary:hover {
+      background: #667eea;
+      color: white;
+    }
+    
+    /* Business Info */
+    .business-info {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .info-card {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 2rem;
       text-align: center;
     }
-    th {
-      background-color: #ffcc00;
-      color: #000;
+    
+    .info-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.5rem;
     }
-    tr:nth-child(even) {
-      background-color: #2c2c2c;
+    
+    .info-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
     }
-    .info {
-      width: 90%;
-      margin: 20px auto;
-      background-color: #1e1e1e;
-      padding: 15px;
-      border-radius: 8px;
+    
+    .info-description {
+      color: #666;
+      line-height: 1.6;
     }
-    .highlight {
-      color: #ffcc00;
-      font-weight: bold;
+    
+    /* Contact Section */
+    .contact-section {
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
-    .selector {
+    
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    
+    .contact-card {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 2rem;
       text-align: center;
-      margin: 20px;
+      transition: all 0.3s ease;
     }
-    select {
-      padding: 5px;
-      font-size: 1em;
+    
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
     }
-    .aviso-18 {
-      background-color: #b00020;
-      color: #fff;
-      padding: 10px;
-      text-align: center;
-      font-weight: bold;
+    
+    .contact-icon {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      color: white;
+      font-size: 1.5rem;
+    }
+    
+    .contact-title {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+    
+    .contact-description {
+      color: #666;
+      margin-bottom: 1.5rem;
+    }
+    
+    .contact-link {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      text-decoration: none;
+      border-radius: 25px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .contact-link:hover {
+      background: linear-gradient(45deg, #5a67d8, #6b46c1);
+      transform: translateY(-2px);
+      color: white;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hero-section h1 {
+        font-size: 2rem;
+      }
+      
+      .pricing-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .pricing-card.featured {
+        transform: none;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        EduClick
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="HTML/cursos.html">Cursos</a></li>
+        <li><a href="#nosotros">Nosotros</a></li>
+        <li><a href="finanzas.html" class="active">Plan Financiero</a></li>
+        <li><a href="simulacion-pagos.html">Pagos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+      <div class="auth-buttons">
+        <a href="HTML/login.html" class="btn btn-outline">Iniciar Sesión</a>
+        <a href="HTML/registro.html" class="btn btn-primary">Registrarse</a>
+      </div>
+    </nav>
+  </header>
 
-<header>
-  <a href="index.html">Inicio</a>
-  <a href="finanzas.html">Plan Financiero</a>
-</header>
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <h1>Plan Financiero EduClick</h1>
+      <p>Descubre nuestros planes de suscripción diseñados para impulsar tu crecimiento profesional con la mejor relación calidad-precio del mercado.</p>
+    </section>
 
-<div class="aviso-18">⚠ Contenido para mayores de 18 años</div>
+    <!-- Pricing Section -->
+    <section class="pricing-section">
+      <div class="container">
+        <h2 class="section-title">Planes de Suscripción</h2>
+        <p class="section-subtitle">Elige el plan que mejor se adapte a tus necesidades de aprendizaje</p>
+        
+        <!-- Pricing Toggle -->
+        <div class="pricing-toggle">
+          <div class="toggle-container">
+            <div class="toggle-option active" onclick="switchPricing('monthly')">Mensual</div>
+            <div class="toggle-option" onclick="switchPricing('annual')">
+              Anual
+              <span class="discount-badge">Ahorra 17%</span>
+            </div>
+          </div>
+        </div>
 
-<h1>Plan Financiero - Plataforma Edu-Clic</h1>
+        <!-- Pricing Cards -->
+        <div class="pricing-grid">
+          <!-- Plan Básico -->
+          <div class="pricing-card">
+            <div class="plan-name">Plan Básico</div>
+            <div class="plan-description">Perfecto para principiantes que quieren explorar la tecnología</div>
+            <div class="plan-price">
+              <span class="price-amount" id="basic-price">$80,000</span>
+              <div>
+                <div class="price-currency">COP</div>
+                <div class="price-period" id="basic-period">por mes</div>
+              </div>
+            </div>
+            <div class="savings" id="basic-savings" style="display: none;">
+              Ahorras $163,200 al año
+            </div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check"></i> Acceso a 3 cursos básicos</li>
+              <li><i class="fas fa-check"></i> Videos en calidad HD</li>
+              <li><i class="fas fa-check"></i> Soporte por email</li>
+              <li><i class="fas fa-check"></i> Certificado de finalización</li>
+              <li><i class="fas fa-check"></i> Acceso móvil</li>
+            </ul>
+            <a href="simulacion-pagos.html" class="plan-button secondary">Comenzar Ahora</a>
+          </div>
 
-<div class="info">
-  <p>En Edu-Clic el estudiante puede pagar de forma <span class="highlight">mensual</span> o <span class="highlight">anual</span>. A continuación, se muestra la proyección de ventas y distribución de ganancias a 5 años.</p>
-</div>
+          <!-- Plan Intermedio -->
+          <div class="pricing-card featured">
+            <div class="plan-name">Plan Intermedio</div>
+            <div class="plan-description">Ideal para profesionales que buscan especializarse</div>
+            <div class="plan-price">
+              <span class="price-amount" id="intermediate-price">$100,000</span>
+              <div>
+                <div class="price-currency">COP</div>
+                <div class="price-period" id="intermediate-period">por mes</div>
+              </div>
+            </div>
+            <div class="savings" id="intermediate-savings" style="display: none;">
+              Ahorras $204,000 al año
+            </div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check"></i> Acceso a 8 cursos intermedios</li>
+              <li><i class="fas fa-check"></i> Videos en calidad 4K</li>
+              <li><i class="fas fa-check"></i> Soporte prioritario</li>
+              <li><i class="fas fa-check"></i> Certificados verificados</li>
+              <li><i class="fas fa-check"></i> Proyectos prácticos</li>
+              <li><i class="fas fa-check"></i> Comunidad exclusiva</li>
+            </ul>
+            <a href="simulacion-pagos.html" class="plan-button primary">Más Popular</a>
+          </div>
 
-<div class="selector">
-  <label for="tipoPago">Selecciona tipo de pago:</label>
-  <select id="tipoPago">
-    <option value="mensual">Mensual ($100,000)</option>
-    <option value="anual" selected>Anual ($1,200,000)</option>
-  </select>
-</div>
+          <!-- Plan Avanzado -->
+          <div class="pricing-card">
+            <div class="plan-name">Plan Avanzado</div>
+            <div class="plan-description">Para expertos que buscan dominar tecnologías avanzadas</div>
+            <div class="plan-price">
+              <span class="price-amount" id="advanced-price">$120,000</span>
+              <div>
+                <div class="price-currency">COP</div>
+                <div class="price-period" id="advanced-period">por mes</div>
+              </div>
+            </div>
+            <div class="savings" id="advanced-savings" style="display: none;">
+              Ahorras $244,800 al año
+            </div>
+            <ul class="plan-features">
+              <li><i class="fas fa-check"></i> Acceso a todos los cursos</li>
+              <li><i class="fas fa-check"></i> Contenido exclusivo</li>
+              <li><i class="fas fa-check"></i> Mentoría personalizada</li>
+              <li><i class="fas fa-check"></i> Certificaciones profesionales</li>
+              <li><i class="fas fa-check"></i> Acceso anticipado a nuevos cursos</li>
+              <li><i class="fas fa-check"></i> Networking con expertos</li>
+              <li><i class="fas fa-check"></i> Descarga offline</li>
+            </ul>
+            <a href="simulacion-pagos.html" class="plan-button secondary">Elegir Plan</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h2>Presupuesto y Proyección (5 años)</h2>
-<table id="tablaProyeccion">
-  <!-- Se llenará con JavaScript -->
-</table>
+    <!-- Business Information -->
+    <section class="business-info">
+      <div class="container">
+        <h2 class="section-title">Nuestra Visión y Misión</h2>
+        
+        <div class="info-grid">
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-eye"></i>
+            </div>
+            <div class="info-title">Visión</div>
+            <div class="info-description">
+              Ser la plataforma educativa líder en Latinoamérica que conecta a estudiantes y expertos en todas las áreas del conocimiento, fomentando el aprendizaje colaborativo y accesible para todos.
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-bullseye"></i>
+            </div>
+            <div class="info-title">Misión</div>
+            <div class="info-description">
+              Proveer una plataforma intuitiva y segura donde estudiantes y profesores compartan, creen y accedan a cursos de alta calidad, asegurando oportunidades educativas para mayores de 18 años en cualquier parte del mundo.
+            </div>
+          </div>
+          
+          <div class="info-card">
+            <div class="info-icon">
+              <i class="fas fa-target"></i>
+            </div>
+            <div class="info-title">Objetivo</div>
+            <div class="info-description">
+              Alcanzar una comunidad activa de más de 50,000 estudiantes en 5 años, diversificando las áreas de estudio y garantizando un reparto justo de ganancias entre creadores y docentes.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<h2>Desglose de Nómina</h2>
-<table>
-  <tr>
-    <th>Cargo</th>
-    <th>Sueldo mensual</th>
-    <th>Sueldo anual</th>
-  </tr>
-  <tr><td>Creador 1</td><td>$2,000,000</td><td>$24,000,000</td></tr>
-  <tr><td>Creador 2</td><td>$1,500,000</td><td>$18,000,000</td></tr>
-  <tr><td>Desarrollador</td><td>$1,500,000</td><td>$18,000,000</td></tr>
-  <tr><td>Gestor de contenidos</td><td>$500,000</td><td>$6,000,000</td></tr>
-  <tr><td>Soporte técnico</td><td>$500,000</td><td>$6,000,000</td></tr>
-  <tr><th>Total</th><th>$6,000,000</th><th>$72,000,000</th></tr>
-</table>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contacto">
+      <div class="container">
+        <h2 class="section-title">Contáctanos</h2>
+        <p class="section-subtitle">¿Tienes preguntas? Estamos aquí para ayudarte. Únete a nuestra comunidad o escríbenos directamente.</p>
+        
+        <div class="contact-grid">
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fab fa-whatsapp"></i>
+            </div>
+            <div class="contact-title">Comunidad WhatsApp</div>
+            <div class="contact-description">
+              Únete a nuestra comunidad de estudiantes y profesores. Comparte dudas, proyectos y conecta con otros aprendices.
+            </div>
+            <a href="https://chat.whatsapp.com/GCLwf4OpLvO9hqi7xyUqp7?mode=ac_t" target="_blank" class="contact-link">
+              <i class="fab fa-whatsapp"></i> Unirse al Grupo
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div class="contact-title">Correo Electrónico</div>
+            <div class="contact-description">
+              Escríbenos para soporte técnico, consultas sobre cursos o cualquier pregunta que tengas sobre EduClick.
+            </div>
+            <a href="mailto:educlick6@gmail.com" class="contact-link">
+              <i class="fas fa-envelope"></i> Enviar Email
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-headset"></i>
+            </div>
+            <div class="contact-title">Soporte Técnico</div>
+            <div class="contact-description">
+              ¿Problemas técnicos? Nuestro equipo de soporte está disponible para ayudarte con cualquier inconveniente.
+            </div>
+            <a href="mailto:educlick6@gmail.com?subject=Soporte Técnico" class="contact-link">
+              <i class="fas fa-tools"></i> Obtener Ayuda
+            </a>
+          </div>
+          
+          <div class="contact-card">
+            <div class="contact-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <div class="contact-title">Ser Instructor</div>
+            <div class="contact-description">
+              ¿Quieres compartir tu conocimiento? Únete como instructor y forma parte de nuestra comunidad educativa.
+            </div>
+            <a href="mailto:educlick6@gmail.com?subject=Quiero ser Instructor" class="contact-link">
+              <i class="fas fa-chalkboard-teacher"></i> Aplicar Ahora
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<h2>Diferencias frente a otras plataformas</h2>
-<table>
-  <tr>
-    <th>Característica</th>
-    <th>Edu-Clic</th>
-    <th>Otras plataformas</th>
-  </tr>
-  <tr>
-    <td>Modelo de pago</td>
-    <td>Suscripción mensual/anual, pago directo a creadores y profesores</td>
-    <td>Pagos por curso o suscripción global, altas comisiones</td>
-  </tr>
-  <tr>
-    <td>Participación del profesor</td>
-    <td>40% de utilidades netas</td>
-    <td>5% a 30% del precio del curso</td>
-  </tr>
-  <tr>
-    <td>Áreas de conocimiento</td>
-    <td>Todas las áreas</td>
-    <td>Nichos específicos</td>
-  </tr>
-  <tr>
-    <td>Intercambio de conocimiento</td>
-    <td>Bidireccional: profesores y estudiantes colaboran</td>
-    <td>Unidireccional</td>
-  </tr>
-</table>
+  <script>
+    // Pricing data
+    const pricingData = {
+      monthly: {
+        basic: { price: 80000, savings: 0 },
+        intermediate: { price: 100000, savings: 0 },
+        advanced: { price: 120000, savings: 0 }
+      },
+      annual: {
+        basic: { price: 66667, savings: 163200 },
+        intermediate: { price: 83333, savings: 204000 },
+        advanced: { price: 99600, savings: 244800 }
+      }
+    };
 
-<h2>Visión</h2>
-<div class="info">
-  Ser la plataforma educativa líder en Latinoamérica que conecta a estudiantes y expertos en todas las áreas del conocimiento, fomentando el aprendizaje colaborativo y accesible para todos.
-</div>
+    let currentPricingMode = 'monthly';
 
-<h2>Misión</h2>
-<div class="info">
-  Proveer una plataforma intuitiva y segura donde estudiantes y profesores compartan, creen y accedan a cursos de alta calidad, asegurando oportunidades educativas para mayores de 18 años en cualquier parte del mundo.
-</div>
-
-<h2>Objetivo</h2>
-<div class="info">
-  Alcanzar una comunidad activa de más de 50,000 estudiantes en 5 años, diversificando las áreas de estudio y garantizando un reparto justo de ganancias entre creadores y docentes.
-</div>
-
-<script>
-  const estudiantesBase = 100;
-  const crecimiento = 0.30;
-  const precioMensual = 100000;
-  const precioAnual = 1200000;
-  const nominaAnual = 72000000;
-  const porcProduccion = 0.12;
-  const porcVentas = 0.10;
-  const porcAdmin = 0.08;
-  const porcCreadores = 0.60;
-  const porcProfesores = 0.40;
-
-  function formatear(num) {
-    return "$" + num.toLocaleString('es-CO');
-  }
-
-  function generarTabla(tipoPago) {
-    let precio = tipoPago === "mensual" ? precioMensual * 12 : precioAnual;
-    let html = `
-      <tr>
-        <th>Año</th>
-        <th>Estudiantes</th>
-        <th>Ingresos anuales</th>
-        <th>Producción (12%)</th>
-        <th>Gastos de ventas (10%)</th>
-        <th>Gastos admin (8%)</th>
-        <th>Nómina anual</th>
-        <th>Utilidad neta</th>
-        <th>Creadores (60%)</th>
-        <th>Profesores (40%)</th>
-      </tr>
-    `;
-    for (let año = 1; año <= 5; año++) {
-      let estudiantes = Math.round(estudiantesBase * Math.pow(1 + crecimiento, año - 1));
-      let ingresos = estudiantes * precio;
-      let produccion = ingresos * porcProduccion;
-      let ventas = ingresos * porcVentas;
-      let admin = ingresos * porcAdmin;
-      let utilidad = ingresos - produccion - ventas - admin - nominaAnual;
-      let creadores = utilidad * porcCreadores;
-      let profesores = utilidad * porcProfesores;
-      html += `
-        <tr>
-          <td>${año}</td>
-          <td>${estudiantes}</td>
-          <td>${formatear(ingresos)}</td>
-          <td>${formatear(produccion)}</td>
-          <td>${formatear(ventas)}</td>
-          <td>${formatear(admin)}</td>
-          <td>${formatear(nominaAnual)}</td>
-          <td>${formatear(utilidad)}</td>
-          <td>${formatear(creadores)}</td>
-          <td>${formatear(profesores)}</td>
-        </tr>
-      `;
+    // Switch between monthly and annual pricing
+    function switchPricing(mode) {
+      currentPricingMode = mode;
+      
+      // Update toggle buttons
+      document.querySelectorAll('.pricing-toggle .toggle-option').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Update pricing display
+      updatePricingDisplay();
     }
-    document.getElementById("tablaProyeccion").innerHTML = html;
-  }
 
-  document.getElementById("tipoPago").addEventListener("change", (e) => {
-    generarTabla(e.target.value);
-  });
+    // Update pricing display
+    function updatePricingDisplay() {
+      const data = pricingData[currentPricingMode];
+      
+      Object.keys(data).forEach(plan => {
+        const priceElement = document.getElementById(`${plan}-price`);
+        const periodElement = document.getElementById(`${plan}-period`);
+        const savingsElement = document.getElementById(`${plan}-savings`);
+        
+        priceElement.textContent = `$${data[plan].price.toLocaleString('es-CO')}`;
+        
+        if (currentPricingMode === 'annual') {
+          periodElement.textContent = 'por mes (anual)';
+          if (data[plan].savings > 0) {
+            savingsElement.textContent = `Ahorras $${data[plan].savings.toLocaleString('es-CO')} al año`;
+            savingsElement.style.display = 'block';
+          }
+        } else {
+          periodElement.textContent = 'por mes';
+          savingsElement.style.display = 'none';
+        }
+      });
+    }
 
-  // Inicial
-  generarTabla("anual");
-</script>
+    // Initialize pricing display
+    document.addEventListener('DOMContentLoaded', function() {
+      updatePricingDisplay();
+    });
 
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+
+    // Header background on scroll
+    window.addEventListener('scroll', function() {
+      const header = document.querySelector('header');
+      if (window.scrollY > 100) {
+        header.style.background = 'rgba(255, 255, 255, 0.98)';
+      } else {
+        header.style.background = 'rgba(255, 255, 255, 0.95)';
+      }
+    });
+  </script>
 </body>
 </html>
