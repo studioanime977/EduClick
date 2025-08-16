@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Editar Perfil</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      background: linear-gradient(to right, #e0f0ff, #f5f9ff);
+    }
+
+    header {
+      background-color: #0d3c55;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 400px;
+      margin: 40px auto;
+      background-color: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 22px;
+      text-align: center;
+      color: #0d3c55;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #0d3c55;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #15597e;
+    }
+
+    .profile-pic-container {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .profile-pic-preview {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #0d3c55;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      margin: 15px 0;
+    }
+
+    .custom-file-upload {
+      display: inline-block;
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #0d3c55;
+      color: white;
+      border-radius: 8px;
+      transition: background-color 0.3s ease;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #15597e;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+  </style>
+   <header>
+    <h1>Edu.Click</h1>
+    <nav>
+      <a href="app.html">Inicio</a>
+      <div class="dropdown">
+        <button class="dropbtn">Mi Perfil ⌄</button>
+        <div class="dropdown-content">
+          <a href="perfil.html">Ver Perfil</a>
+          <a href="#" data-role>Tipo: Cliente</a>
+          <a href="editar-perfil.html">Editar Perfil</a>
+          <a href="#" onclick="cerrarSesion()">Cerrar Sesión</a>
+        </div>
+      </div>
+      <a href="cursos.html">Cursos</a>
+      </div>
+    </nav>
+  </header>
+</head>
+<body>
+  <header>Editar Perfil</header>
+
+  <div class="container">
+    <h2>Actualiza tu información</h2>
+
+    <form id="formEditarPerfil">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" />
+
+      <label for="correo">Correo:</label>
+      <input type="email" id="correo" name="correo" placeholder="Tu correo" />
+
+      <label for="tipoCuenta">Tipo de cuenta:</label>
+      <select id="tipoCuenta" name="tipoCuenta">
+        <option value="Cliente">Cliente</option>
+        <option value="Creador">Creador de Contenido</option>
+      </select>
+
+      <label>Foto de perfil:</label>
+      <div class="profile-pic-container">
+        <label for="fotoPerfil" class="custom-file-upload">Seleccionar Foto</label>
+        <input type="file" id="fotoPerfil" accept="image/*" onchange="mostrarVistaPrevia(event)">
+        <div>
+          <img id="previewImagen" class="profile-pic-preview" src="https://via.placeholder.com/120" alt="Vista previa de la foto de perfil" />
+        </div>
+      </div>
+
+      <button type="submit">Guardar cambios</button>
+    </form>
+  </div>
+
+  <script>
+    function mostrarVistaPrevia(event) {
+      const input = event.target;
+      const preview = document.getElementById('previewImagen');
+
+      if (input.files && input.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          preview.src = e.target.result;
+          preview.setAttribute("data-src", e.target.result); // lo guardamos temporalmente
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    document.getElementById("formEditarPerfil").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value;
+      const correo = document.getElementById("correo").value;
+      const tipoCuenta = document.getElementById("tipoCuenta").value;
+      const foto = document.getElementById("previewImagen").getAttribute("data-src") || document.getElementById("previewImagen").src;
+
+      // Guardar en localStorage
+      localStorage.setItem("perfilNombre", nombre);
+      localStorage.setItem("perfilCorreo", correo);
+      localStorage.setItem("perfilTipoCuenta", tipoCuenta);
+      localStorage.setItem("perfilFoto", foto);
+
+      // Redirigir a app.html
+      window.location.href = "app.html";
+    });
+  </script>
+</body>
+</html>

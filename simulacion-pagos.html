@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulación de Pagos - EduClick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      text-align: center;
+      color: white;
+      margin-bottom: 3rem;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+
+    .header p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    .role-selector {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .role-btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: rgba(255,255,255,0.2);
+      color: white;
+      border: 2px solid transparent;
+    }
+
+    .role-btn.active {
+      background: white;
+      color: #667eea;
+      border-color: white;
+    }
+
+    .simulation-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .simulation-card {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    }
+
+    .card-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: 500;
+      color: #555;
+      margin-bottom: 0.5rem;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    .price-display {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      margin: 1rem 0;
+    }
+
+    .price-display .amount {
+      font-size: 2rem;
+      font-weight: 700;
+    }
+
+    .price-display .period {
+      font-size: 0.9rem;
+      opacity: 0.9;
+    }
+
+    .results-section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      margin-top: 2rem;
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .result-item {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .result-item .value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .result-item .label {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .payment-method {
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .payment-method:hover {
+      background: #e9ecef;
+    }
+
+    .payment-method.selected {
+      border-color: #667eea;
+      background: #e7f3ff;
+    }
+
+    .payment-method i {
+      font-size: 2rem;
+      color: #667eea;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-simulate {
+      width: 100%;
+      padding: 1rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      margin-top: 1rem;
+    }
+
+    .btn-simulate:hover {
+      transform: translateY(-2px);
+    }
+
+    .creator-info {
+      background: #e8f5e8;
+      border: 1px solid #4caf50;
+      border-radius: 8px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+
+    .creator-info h4 {
+      color: #2e7d32;
+      margin-bottom: 0.5rem;
+    }
+
+    .creator-info p {
+      color: #388e3c;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      .simulation-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .role-selector {
+        flex-direction: column;
+        align-items: center;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="index.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      Volver al Inicio
+    </a>
+
+    <div class="header">
+      <h1>Simulación de Pagos</h1>
+      <p>Calcula tus costos como estudiante o tus ganancias como creador</p>
+    </div>
+
+    <div class="role-selector">
+      <button class="role-btn active" onclick="switchRole('cliente')">
+        <i class="fas fa-user-graduate"></i> Soy Estudiante
+      </button>
+      <button class="role-btn" onclick="switchRole('creador')">
+        <i class="fas fa-chalkboard-teacher"></i> Soy Creador
+      </button>
+    </div>
+
+    <!-- Cliente/Estudiante View -->
+    <div id="cliente-view" class="simulation-container">
+      <div class="simulation-card">
+        <h3 class="card-title">
+          <i class="fas fa-calculator"></i>
+          Calculadora de Costos
+        </h3>
+        
+        <div class="form-group">
+          <label for="plan-tipo">Tipo de Plan:</label>
+          <select id="plan-tipo" onchange="updateClientPrice()">
+            <option value="mensual">Plan Mensual</option>
+            <option value="anual">Plan Anual (2 meses gratis)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="num-cursos">Número de Cursos:</label>
+          <input type="number" id="num-cursos" value="1" min="1" max="10" onchange="updateClientPrice()">
+        </div>
+
+        <div class="form-group">
+          <label for="duracion">Duración del Estudio (meses):</label>
+          <input type="number" id="duracion" value="6" min="1" max="24" onchange="updateClientPrice()">
+        </div>
+
+        <div class="price-display">
+          <div class="amount" id="client-price">$100,000</div>
+          <div class="period">COP por mes</div>
+        </div>
+
+        <div class="form-group">
+          <label>Método de Pago Preferido:</label>
+          <div class="payment-methods">
+            <div class="payment-method selected" onclick="selectPayment(this)">
+              <i class="fas fa-credit-card"></i>
+              <div>Tarjeta</div>
+            </div>
+            <div class="payment-method" onclick="selectPayment(this)">
+              <i class="fas fa-university"></i>
+              <div>PSE</div>
+            </div>
+            <div class="payment-method" onclick="selectPayment(this)">
+              <i class="fas fa-mobile-alt"></i>
+              <div>Nequi</div>
+            </div>
+          </div>
+        </div>
+
+        <button class="btn-simulate" onclick="calculateClient()">
+          <i class="fas fa-calculator"></i> Calcular Costos
+        </button>
+      </div>
+
+      <div class="simulation-card">
+        <h3 class="card-title">
+          <i class="fas fa-chart-pie"></i>
+          Resumen de Inversión
+        </h3>
+        
+        <div id="client-results">
+          <p style="text-align: center; color: #666; margin-top: 2rem;">
+            Completa la información para ver tu resumen de inversión
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Creador View -->
+    <div id="creador-view" class="simulation-container" style="display: none;">
+      <div class="simulation-card">
+        <h3 class="card-title">
+          <i class="fas fa-chart-line"></i>
+          Calculadora de Ingresos
+        </h3>
+        
+        <div class="form-group">
+          <label for="estudiantes-mes">Estudiantes por Mes:</label>
+          <input type="number" id="estudiantes-mes" value="50" min="1" onchange="updateCreatorEarnings()">
+        </div>
+
+        <div class="form-group">
+          <label for="precio-curso">Precio por Curso (COP):</label>
+          <input type="number" id="precio-curso" value="100000" min="50000" step="10000" onchange="updateCreatorEarnings()">
+        </div>
+
+        <div class="form-group">
+          <label for="comision">Comisión EduClick (%):</label>
+          <select id="comision" onchange="updateCreatorEarnings()">
+            <option value="30">30% - Plan Básico</option>
+            <option value="25">25% - Plan Premium</option>
+            <option value="20">20% - Plan Exclusivo</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="proyeccion">Proyección (meses):</label>
+          <input type="number" id="proyeccion" value="12" min="1" max="60" onchange="updateCreatorEarnings()">
+        </div>
+
+        <div class="price-display">
+          <div class="amount" id="creator-earnings">$3,500,000</div>
+          <div class="period">COP ganancia mensual</div>
+        </div>
+
+        <button class="btn-simulate" onclick="calculateCreator()">
+          <i class="fas fa-chart-line"></i> Calcular Ganancias
+        </button>
+
+        <div class="creator-info">
+          <h4><i class="fas fa-lightbulb"></i> Consejos para Creadores</h4>
+          <p>• Crea contenido de calidad para aumentar retención</p>
+          <p>• Interactúa con tus estudiantes regularmente</p>
+          <p>• Actualiza tu curso con nuevas tendencias</p>
+        </div>
+      </div>
+
+      <div class="simulation-card">
+        <h3 class="card-title">
+          <i class="fas fa-money-bill-wave"></i>
+          Proyección de Ingresos
+        </h3>
+        
+        <div id="creator-results">
+          <p style="text-align: center; color: #666; margin-top: 2rem;">
+            Completa la información para ver tu proyección de ingresos
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section" id="detailed-results" style="display: none;">
+      <h3 class="card-title">
+        <i class="fas fa-chart-bar"></i>
+        Análisis Detallado
+      </h3>
+      <div id="detailed-content"></div>
+    </div>
+  </div>
+
+  <script>
+    function switchRole(role) {
+      // Update buttons
+      document.querySelectorAll('.role-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      // Show/hide views
+      if (role === 'cliente') {
+        document.getElementById('cliente-view').style.display = 'grid';
+        document.getElementById('creador-view').style.display = 'none';
+      } else {
+        document.getElementById('cliente-view').style.display = 'none';
+        document.getElementById('creador-view').style.display = 'grid';
+      }
+      
+      document.getElementById('detailed-results').style.display = 'none';
+    }
+
+    function updateClientPrice() {
+      const planTipo = document.getElementById('plan-tipo').value;
+      const numCursos = parseInt(document.getElementById('num-cursos').value);
+      
+      let precioBase = planTipo === 'mensual' ? 100000 : 1200000;
+      let precio = precioBase * numCursos;
+      
+      if (planTipo === 'anual') {
+        precio = precio / 12; // Mostrar precio mensual equivalente
+      }
+      
+      document.getElementById('client-price').textContent = 
+        new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(precio);
+    }
+
+    function updateCreatorEarnings() {
+      const estudiantes = parseInt(document.getElementById('estudiantes-mes').value);
+      const precioCurso = parseInt(document.getElementById('precio-curso').value);
+      const comision = parseInt(document.getElementById('comision').value);
+      
+      const ingresosBrutos = estudiantes * precioCurso;
+      const gananciaCreador = ingresosBrutos * (100 - comision) / 100;
+      
+      document.getElementById('creator-earnings').textContent = 
+        new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(gananciaCreador);
+    }
+
+    function selectPayment(element) {
+      document.querySelectorAll('.payment-method').forEach(method => method.classList.remove('selected'));
+      element.classList.add('selected');
+    }
+
+    function calculateClient() {
+      const planTipo = document.getElementById('plan-tipo').value;
+      const numCursos = parseInt(document.getElementById('num-cursos').value);
+      const duracion = parseInt(document.getElementById('duracion').value);
+      
+      let precioMensual = planTipo === 'mensual' ? 100000 : 100000; // Anual ya tiene descuento
+      let costoTotal = precioMensual * numCursos * duracion;
+      
+      if (planTipo === 'anual') {
+        costoTotal = 1200000 * numCursos * Math.ceil(duracion / 12);
+      }
+      
+      const ahorroAnual = planTipo === 'anual' ? (precioMensual * 12 - 1200000) * numCursos : 0;
+      
+      document.getElementById('client-results').innerHTML = `
+        <div class="results-grid">
+          <div class="result-item">
+            <div class="value">${new Intl.NumberFormat('es-CO').format(costoTotal)}</div>
+            <div class="label">Costo Total (COP)</div>
+          </div>
+          <div class="result-item">
+            <div class="value">${new Intl.NumberFormat('es-CO').format(Math.round(costoTotal / duracion))}</div>
+            <div class="label">Promedio Mensual</div>
+          </div>
+          <div class="result-item">
+            <div class="value">${numCursos}</div>
+            <div class="label">Cursos Incluidos</div>
+          </div>
+          <div class="result-item">
+            <div class="value">${new Intl.NumberFormat('es-CO').format(ahorroAnual)}</div>
+            <div class="label">Ahorro Anual</div>
+          </div>
+        </div>
+        ${ahorroAnual > 0 ? '<div class="creator-info"><h4>💰 ¡Excelente elección!</h4><p>Con el plan anual ahorras ' + new Intl.NumberFormat('es-CO').format(ahorroAnual) + ' COP</p></div>' : ''}
+      `;
+    }
+
+    function calculateCreator() {
+      const estudiantes = parseInt(document.getElementById('estudiantes-mes').value);
+      const precioCurso = parseInt(document.getElementById('precio-curso').value);
+      const comision = parseInt(document.getElementById('comision').value);
+      const proyeccion = parseInt(document.getElementById('proyeccion').value);
+      
+      const ingresosBrutos = estudiantes * precioCurso;
+      const comisionPlataforma = ingresosBrutos * comision / 100;
+      const gananciaCreador = ingresosBrutos - comisionPlataforma;
+      const proyeccionTotal = gananciaCreador * proyeccion;
+      
+      document.getElementById('creator-results').innerHTML = `
+        <div class="results-grid">
+          <div class="result-item">
+            <div class="value">${new Intl.NumberFormat('es-CO').format(gananciaCreador)}</div>
+            <div class="label">Ganancia Mensual</div>
+          </div>
+          <div class="result-item">
+            <div class="value">${new Intl.NumberFormat('es-CO').format(proyeccionTotal)}</div>
+            <div class="label">Proyección ${proyeccion} meses</div>
+          </div>
+          <div class="result-item">
+            <div class="value">${100 - comision}%</div>
+            <div class="label">Tu Porcentaje</div>
+          </div>
+          <div class="result-item">
+            <div class="value">${new Intl.NumberFormat('es-CO').format(comisionPlataforma)}</div>
+            <div class="label">Comisión Plataforma</div>
+          </div>
+        </div>
+        <div class="creator-info">
+          <h4>📈 Potencial de Crecimiento</h4>
+          <p>Con ${estudiantes * 2} estudiantes duplicarías tus ingresos a ${new Intl.NumberFormat('es-CO').format(gananciaCreador * 2)} COP/mes</p>
+        </div>
+      `;
+    }
+
+    // Initialize
+    updateClientPrice();
+    updateCreatorEarnings();
+  </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceder al Curso - EduClick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+    }
+
+    .container {
+      max-width: 600px;
+      background: white;
+      border-radius: 20px;
+      padding: 3rem;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    }
+
+    .course-icon {
+      width: 100px;
+      height: 100px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      margin: 0 auto 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      color: #666;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    .course-info {
+      background: #f8f9fa;
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .course-stats {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #667eea;
+    }
+
+    .stat-label {
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    .btn {
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 25px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.3s ease;
+      margin: 0.5rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    .btn-secondary {
+      background: #f8f9fa;
+      color: #667eea;
+      border: 2px solid #667eea;
+    }
+
+    .btn-secondary:hover {
+      background: #667eea;
+      color: white;
+    }
+
+    .subscription-required {
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      margin-bottom: 2rem;
+    }
+
+    .subscription-required h3 {
+      margin-bottom: 0.5rem;
+    }
+
+    .back-link {
+      position: absolute;
+      top: 2rem;
+      left: 2rem;
+      color: white;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+    }
+
+    .back-link:hover {
+      background: rgba(255,255,255,0.3);
+    }
+  </style>
+</head>
+<body>
+  <a href="cursos.html" class="back-link">
+    <i class="fas fa-arrow-left"></i>
+    Volver a Cursos
+  </a>
+
+  <div class="container">
+    <div class="course-icon" id="courseIcon">
+      <i class="fab fa-html5"></i>
+    </div>
+    
+    <h1 id="courseTitle">HTML y CSS desde Cero</h1>
+    <p id="courseDescription">Accede a todas las clases en video de este curso y aprende a tu ritmo con contenido de alta calidad.</p>
+    
+    <div class="course-info">
+      <div class="course-stats">
+        <div class="stat-item">
+          <div class="stat-value" id="videoCount">24</div>
+          <div class="stat-label">Videos</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="duration">25h</div>
+          <div class="stat-label">Duración</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value" id="students">2,341</div>
+          <div class="stat-label">Estudiantes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Subscription Required Banner -->
+    <div class="subscription-required" id="subscriptionBanner">
+      <h3><i class="fas fa-crown"></i> Suscripción Requerida</h3>
+      <p>Para acceder a todas las clases de video, necesitas una suscripción activa de EduClick.</p>
+    </div>
+
+    <div class="actions">
+      <a href="curso-videos.html?curso=html-css" class="btn btn-primary" id="accessBtn">
+        <i class="fas fa-play"></i>
+        Acceder a las Clases
+      </a>
+      <a href="../simulacion-pagos.html" class="btn btn-secondary">
+        <i class="fas fa-credit-card"></i>
+        Suscribirse ($100,000 COP/mes)
+      </a>
+    </div>
+  </div>
+
+  <script>
+    // Datos de los cursos disponibles
+    const courses = {
+      'html-css': {
+        title: 'HTML y CSS desde Cero',
+        description: 'Aprende los fundamentos del desarrollo web creando sitios modernos y responsivos.',
+        icon: 'fab fa-html5',
+        videoCount: '24',
+        duration: '25h',
+        students: '2,341'
+      },
+      'javascript': {
+        title: 'JavaScript Moderno',
+        description: 'Domina JavaScript ES6+, DOM, APIs y frameworks como React.',
+        icon: 'fab fa-js-square',
+        videoCount: '32',
+        duration: '40h',
+        students: '1,876'
+      },
+      'python': {
+        title: 'Python para Principiantes',
+        description: 'Aprende Python desde cero: sintaxis, estructuras de datos, POO.',
+        icon: 'fab fa-python',
+        videoCount: '28',
+        duration: '35h',
+        students: '3,124'
+      },
+      'figma': {
+        title: 'Diseño UX/UI con Figma',
+        description: 'Aprende a diseñar interfaces atractivas y funcionales con Figma.',
+        icon: 'fab fa-figma',
+        videoCount: '20',
+        duration: '30h',
+        students: '1,567'
+      },
+      'marketing': {
+        title: 'Marketing Digital y SEO',
+        description: 'Estrategias de marketing digital, Google Ads, SEO y redes sociales.',
+        icon: 'fas fa-bullhorn',
+        videoCount: '18',
+        duration: '28h',
+        students: '2,156'
+      },
+      'datos': {
+        title: 'Análisis de Datos con Python',
+        description: 'Pandas, NumPy, visualización de datos y machine learning básico.',
+        icon: 'fas fa-chart-line',
+        videoCount: '26',
+        duration: '35h',
+        students: '1,743'
+      },
+      'movil': {
+        title: 'Desarrollo de Apps Móviles',
+        description: 'React Native y Flutter para crear apps nativas multiplataforma.',
+        icon: 'fas fa-mobile-alt',
+        videoCount: '30',
+        duration: '50h',
+        students: '987'
+      },
+      'ia': {
+        title: 'Inteligencia Artificial y ChatGPT',
+        description: 'Machine Learning, Deep Learning y uso profesional de IA.',
+        icon: 'fas fa-robot',
+        videoCount: '22',
+        duration: '38h',
+        students: '1,234'
+      }
+    };
+
+    // Obtener parámetro de curso de la URL
+    function getCourseFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('curso') || 'html-css';
+    }
+
+    // Cargar información del curso
+    function loadCourseInfo() {
+      const courseId = getCourseFromURL();
+      const course = courses[courseId];
+      
+      if (course) {
+        document.getElementById('courseTitle').textContent = course.title;
+        document.getElementById('courseDescription').textContent = course.description;
+        document.getElementById('courseIcon').innerHTML = `<i class="${course.icon}"></i>`;
+        document.getElementById('videoCount').textContent = course.videoCount;
+        document.getElementById('duration').textContent = course.duration;
+        document.getElementById('students').textContent = course.students;
+        
+        // Actualizar enlace de acceso
+        document.getElementById('accessBtn').href = `curso-videos.html?curso=${courseId}`;
+      }
+    }
+
+    // Verificar suscripción (simulación)
+    function checkSubscription() {
+      // En una implementación real, esto verificaría la suscripción del usuario
+      const isSubscribed = true; // Cambiar a false para mostrar banner de suscripción
+      
+      if (isSubscribed) {
+        document.getElementById('subscriptionBanner').style.display = 'none';
+        document.getElementById('accessBtn').innerHTML = '<i class="fas fa-play"></i> Acceder a las Clases';
+      } else {
+        document.getElementById('subscriptionBanner').style.display = 'block';
+        document.getElementById('accessBtn').innerHTML = '<i class="fas fa-lock"></i> Ver Vista Previa';
+      }
+    }
+
+    // Inicializar página
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCourseInfo();
+      checkSubscription();
+    });
+  </script>
+</body>
+</html>

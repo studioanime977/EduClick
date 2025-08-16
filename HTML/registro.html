@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro - Edu.Click</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #16222a, #3a6073);
+      color: #fff;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .container {
+      background: #1e3c50;
+      padding: 2rem 3rem;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      color: #ffc107;
+    }
+
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    input[type="submit"] {
+      margin-top: 2rem;
+      background: #ffc107;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    input[type="submit"]:hover {
+      background: #e0a800;
+    }
+
+    .login-link {
+      margin-top: 1.2rem;
+      text-align: center;
+    }
+
+    .login-link a {
+      background-color: transparent;
+      color: #ffc107;
+      text-decoration: none;
+      font-weight: bold;
+      border: 2px solid #ffc107;
+      padding: 10px 20px;
+      border-radius: 8px;
+      display: inline-block;
+      transition: all 0.3s ease;
+    }
+
+    .login-link a:hover {
+      background-color: #ffc107;
+      color: #1e3c50;
+    }
+
+    .success-message {
+      margin-top: 1.5rem;
+      background: #28a745;
+      color: #fff;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Crear Cuenta</h2>
+    <form id="registroForm">
+      <label for="nombre">Nombre completo</label>
+      <input type="text" id="nombre" required />
+
+      <label for="email">Correo electrónico</label>
+      <input type="email" id="email" required />
+
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" required />
+
+      <label for="tipoCuenta">Tipo de cuenta</label>
+      <select id="tipoCuenta" required>
+        <option value="">Selecciona una opción</option>
+        <option value="cliente">Cliente</option>
+        <option value="creador">Creador de contenido</option>
+      </select>
+
+      <input type="submit" value="Registrarse" />
+    </form>
+
+    <div class="login-link">
+      <a href="login.html">¿Ya tienes una cuenta? Inicia sesión</a>
+    </div>
+
+    <div class="success-message" id="mensajeExito">
+      ¡Registro exitoso!<br>
+      Tipo de cuenta: <span id="tipoSeleccionado"></span>
+    </div>
+
+    <div class="footer">© 2025 Edu.Click</div>
+  </div>
+
+  <script>
+    const form = document.getElementById("registroForm");
+    const mensaje = document.getElementById("mensajeExito");
+    const tipoSpan = document.getElementById("tipoSeleccionado");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const tipo = document.getElementById("tipoCuenta").value;
+
+      if (nombre && email && password && tipo) {
+        tipoSpan.textContent = tipo === "creador" ? "Creador de contenido" : "Cliente";
+        mensaje.style.display = "block";
+
+        setTimeout(() => {
+          window.location.href = "app.html";
+        }, 2000);
+      }
+    });
+  </script>
+</body>
+</html>

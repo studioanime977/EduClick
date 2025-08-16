@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cursos - EduClick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+    .page-header { text-align: center; color: white; margin-bottom: 3rem; }
+    .page-header h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+    .courses-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem; margin-bottom: 3rem; }
+    .course-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    .course-card:hover { transform: translateY(-5px); }
+    .course-image {
+      height: 200px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+    }
+    .course-content { padding: 1.5rem; }
+    .course-card h3 { font-size: 1.3rem; font-weight: 600; margin-bottom: 0.5rem; }
+    .course-card p { color: #666; margin-bottom: 1rem; }
+    .course-price { font-size: 1.2rem; font-weight: 600; color: #667eea; margin-bottom: 1rem; }
+    .video-tutorials {
+      background: #f8f9fa;
+      border-radius: 10px;
+      padding: 1rem;
+      margin-top: 1rem;
+    }
+    .video-tutorials h4 { color: #333; margin-bottom: 0.5rem; font-size: 1rem; }
+    .video-links { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .video-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.3rem 0.6rem;
+      background: white;
+      border-radius: 15px;
+      text-decoration: none;
+      color: #666;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+    }
+    .video-link:hover { background: #ff0000; color: white; }
+    .video-link.instagram:hover { background: #e4405f; }
+    .video-link.tiktok:hover { background: #000; }
+    .btn {
+      padding: 0.7rem 1.5rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="page-header">
+      <h1>Catálogo de Cursos EduClick</h1>
+      <p>Aprende tecnología con tutoriales en video de YouTube, Instagram y TikTok</p>
+    </div>
+
+    <div class="courses-grid">
+      <!-- Curso 1: HTML y CSS -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fab fa-html5"></i>
+        </div>
+        <div class="course-content">
+          <h3>HTML y CSS desde Cero</h3>
+          <p>Aprende los fundamentos del desarrollo web creando sitios modernos y responsivos.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=UB1O30fR-EE" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> HTML Básico
+              </a>
+              <a href="https://youtube.com/watch?v=1Rs2ND1ryYc" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> CSS Flexbox
+              </a>
+              <a href="https://instagram.com/p/html_tips" class="video-link instagram" target="_blank">
+                <i class="fab fa-instagram"></i> Tips CSS
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 2: JavaScript -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fab fa-js-square"></i>
+        </div>
+        <div class="course-content">
+          <h3>JavaScript Moderno</h3>
+          <p>Domina JavaScript ES6+, DOM, APIs y frameworks como React.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=hdI2bqOjy3c" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> JavaScript ES6
+              </a>
+              <a href="https://youtube.com/watch?v=dpw9EHDh2bM" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> React Hooks
+              </a>
+              <a href="https://tiktok.com/@js_tips" class="video-link tiktok" target="_blank">
+                <i class="fab fa-tiktok"></i> JS Tips
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 3: Python -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fab fa-python"></i>
+        </div>
+        <div class="course-content">
+          <h3>Python para Principiantes</h3>
+          <p>Aprende Python desde cero: sintaxis, estructuras de datos, POO.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=rfscVS0vtbw" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Python Básico
+              </a>
+              <a href="https://youtube.com/watch?v=YYXdXT2l-Gg" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Listas Python
+              </a>
+              <a href="https://instagram.com/p/python_tips" class="video-link instagram" target="_blank">
+                <i class="fab fa-instagram"></i> Python Tips
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 4: Diseño UX/UI -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fab fa-figma"></i>
+        </div>
+        <div class="course-content">
+          <h3>Diseño UX/UI con Figma</h3>
+          <p>Aprende a diseñar interfaces atractivas y funcionales con Figma.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=FTlczfBs46w" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Figma Básico
+              </a>
+              <a href="https://youtube.com/watch?v=3q3FV65ZrUs" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> UI Design
+              </a>
+              <a href="https://instagram.com/p/design_tips" class="video-link instagram" target="_blank">
+                <i class="fab fa-instagram"></i> Design Tips
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 5: Marketing Digital -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fas fa-bullhorn"></i>
+        </div>
+        <div class="course-content">
+          <h3>Marketing Digital y SEO</h3>
+          <p>Estrategias de marketing digital, Google Ads, SEO y redes sociales.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=VRqFXcYhcbU" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> SEO Básico
+              </a>
+              <a href="https://youtube.com/watch?v=9YffrCViTVk" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Google Ads
+              </a>
+              <a href="https://tiktok.com/@marketing_tips" class="video-link tiktok" target="_blank">
+                <i class="fab fa-tiktok"></i> Marketing
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 6: Análisis de Datos -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fas fa-chart-line"></i>
+        </div>
+        <div class="course-content">
+          <h3>Análisis de Datos con Python</h3>
+          <p>Pandas, NumPy, visualización de datos y machine learning básico.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=vmEHCJofslg" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Pandas Básico
+              </a>
+              <a href="https://youtube.com/watch?v=ZyhVh-qRZPA" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Data Viz
+              </a>
+              <a href="https://instagram.com/p/data_science" class="video-link instagram" target="_blank">
+                <i class="fab fa-instagram"></i> Data Tips
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 7: Desarrollo Móvil -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fas fa-mobile-alt"></i>
+        </div>
+        <div class="course-content">
+          <h3>Desarrollo de Apps Móviles</h3>
+          <p>React Native y Flutter para crear apps nativas multiplataforma.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=0-S5a0eXPoc" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> React Native
+              </a>
+              <a href="https://youtube.com/watch?v=x0uinJvhNxI" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Flutter
+              </a>
+              <a href="https://tiktok.com/@mobile_dev" class="video-link tiktok" target="_blank">
+                <i class="fab fa-tiktok"></i> App Dev
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Curso 8: Inteligencia Artificial -->
+      <div class="course-card">
+        <div class="course-image">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="course-content">
+          <h3>Inteligencia Artificial y ChatGPT</h3>
+          <p>Machine Learning, Deep Learning y uso profesional de IA.</p>
+          <div class="course-price">$100,000 COP/mes</div>
+          <a href="ver curso.html" class="btn">Ver Curso</a>
+          
+          <div class="video-tutorials">
+            <h4><i class="fab fa-youtube"></i> Tutoriales Gratuitos</h4>
+            <div class="video-links">
+              <a href="https://youtube.com/watch?v=aircAruvnKk" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> Neural Networks
+              </a>
+              <a href="https://youtube.com/watch?v=kCc8FmEb1nY" class="video-link" target="_blank">
+                <i class="fab fa-youtube"></i> ChatGPT Tips
+              </a>
+              <a href="https://instagram.com/p/ai_tips" class="video-link instagram" target="_blank">
+                <i class="fab fa-instagram"></i> AI News
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 3rem;">
+      <a href="../index.html" class="btn" style="background: rgba(255,255,255,0.2); color: white;">
+        <i class="fas fa-arrow-left"></i> Volver al Inicio
+      </a>
+    </div>
+  </div>
+</body>
+</html>

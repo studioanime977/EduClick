@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Clases en Video - EduClick</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: #333;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+
+    .header {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .course-info {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .course-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .course-details h1 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .course-details p {
+      color: #666;
+      font-size: 1.1rem;
+    }
+
+    .course-stats {
+      display: flex;
+      gap: 2rem;
+      margin-top: 1rem;
+    }
+
+    .stat-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #888;
+    }
+
+    .subscription-status {
+      background: linear-gradient(45deg, #4caf50, #45a049);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .video-sections {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .section {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid #f0f0f0;
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #333;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .section-progress {
+      background: #f0f0f0;
+      border-radius: 10px;
+      padding: 0.3rem 0.8rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .video-card {
+      border: 2px solid #f0f0f0;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .video-card:hover {
+      border-color: #667eea;
+      transform: translateY(-2px);
+    }
+
+    .video-card.locked {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .video-thumbnail {
+      height: 180px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .video-duration {
+      position: absolute;
+      bottom: 0.5rem;
+      right: 0.5rem;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      padding: 0.2rem 0.5rem;
+      border-radius: 5px;
+      font-size: 0.8rem;
+    }
+
+    .lock-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+    }
+
+    .video-info {
+      padding: 1rem;
+    }
+
+    .video-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 0.5rem;
+    }
+
+    .video-description {
+      color: #666;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .video-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: #888;
+    }
+
+    .video-status {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .status-completed {
+      color: #4caf50;
+    }
+
+    .status-current {
+      color: #ff9800;
+    }
+
+    .status-locked {
+      color: #f44336;
+    }
+
+    .upgrade-banner {
+      background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+      color: white;
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .upgrade-banner h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .upgrade-btn {
+      background: white;
+      color: #ee5a24;
+      padding: 0.8rem 2rem;
+      border: none;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: transform 0.3s ease;
+    }
+
+    .upgrade-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      text-decoration: none;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1rem;
+      border-radius: 25px;
+      margin-bottom: 2rem;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: rgba(255,255,255,0.3);
+    }
+
+    @media (max-width: 768px) {
+      .course-info {
+        flex-direction: column;
+        text-align: center;
+      }
+      
+      .course-stats {
+        justify-content: center;
+      }
+      
+      .section-header {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="cursos.html" class="back-btn">
+      <i class="fas fa-arrow-left"></i>
+      Volver a Cursos
+    </a>
+
+    <div class="header">
+      <div class="course-info">
+        <div class="course-icon" id="courseIcon">
+          <i class="fab fa-html5"></i>
+        </div>
+        <div class="course-details">
+          <h1 id="courseTitle">HTML y CSS desde Cero</h1>
+          <p id="courseDescription">Aprende los fundamentos del desarrollo web creando sitios modernos y responsivos</p>
+          <div class="course-stats">
+            <div class="stat-item">
+              <i class="fas fa-clock"></i>
+              <span id="courseDuration">25 horas</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-video"></i>
+              <span id="videoCount">24 videos</span>
+            </div>
+            <div class="stat-item">
+              <i class="fas fa-users"></i>
+              <span id="studentCount">2,341 estudiantes</span>
+            </div>
+          </div>
+        </div>
+        <div class="subscription-status">
+          <i class="fas fa-check-circle"></i>
+          Suscripción Activa
+        </div>
+      </div>
+    </div>
+
+    <!-- Upgrade Banner for Free Users -->
+    <div class="upgrade-banner" id="upgradeBanner" style="display: none;">
+      <h3><i class="fas fa-crown"></i> Desbloquea Todo el Contenido</h3>
+      <p>Suscríbete para acceder a todos los videos y recursos del curso</p>
+      <button class="upgrade-btn" onclick="window.location.href='../simulacion-pagos.html'">
+        Suscribirse por $100,000 COP/mes
+      </button>
+    </div>
+
+    <div class="video-sections">
+      <!-- Sección 1: Fundamentos -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-play-circle"></i>
+            Módulo 1: Fundamentos de HTML
+          </h2>
+          <div class="section-progress">3/6 completados</div>
+        </div>
+        
+        <div class="video-grid">
+          <div class="video-card" onclick="playVideo('intro-html')">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">12:34</div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">1. Introducción a HTML</div>
+              <div class="video-description">Qué es HTML, estructura básica y primeros elementos</div>
+              <div class="video-meta">
+                <div class="video-status status-completed">
+                  <i class="fas fa-check-circle"></i> Completado
+                </div>
+                <span>Hace 2 días</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card" onclick="playVideo('etiquetas-html')">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">18:45</div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">2. Etiquetas Básicas de HTML</div>
+              <div class="video-description">h1-h6, p, div, span y elementos de texto</div>
+              <div class="video-meta">
+                <div class="video-status status-completed">
+                  <i class="fas fa-check-circle"></i> Completado
+                </div>
+                <span>Hace 1 día</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card" onclick="playVideo('listas-enlaces')">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">15:22</div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">3. Listas y Enlaces</div>
+              <div class="video-description">ul, ol, li y etiquetas de enlace</div>
+              <div class="video-meta">
+                <div class="video-status status-current">
+                  <i class="fas fa-play-circle"></i> En progreso
+                </div>
+                <span>50% completado</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">20:15</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">4. Formularios HTML</div>
+              <div class="video-description">input, form, button y validación básica</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa el video anterior</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">16:30</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">5. Imágenes y Multimedia</div>
+              <div class="video-description">img, video, audio y elementos multimedia</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa videos anteriores</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">22:10</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">6. Semántica HTML5</div>
+              <div class="video-description">header, nav, main, section, article, footer</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa videos anteriores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección 2: CSS -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-palette"></i>
+            Módulo 2: Fundamentos de CSS
+          </h2>
+          <div class="section-progress">0/8 completados</div>
+        </div>
+        
+        <div class="video-grid">
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">14:25</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">7. Introducción a CSS</div>
+              <div class="video-description">Qué es CSS, sintaxis y formas de aplicar estilos</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa Módulo 1</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">19:33</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">8. Selectores CSS</div>
+              <div class="video-description">Tipos de selectores, especificidad y cascada</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa videos anteriores</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">25:18</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">9. Box Model y Layout</div>
+              <div class="video-description">margin, padding, border y display</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa videos anteriores</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">30:45</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">10. Flexbox</div>
+              <div class="video-description">Layout flexible con Flexbox</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa videos anteriores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sección 3: Proyecto Práctico -->
+      <div class="section">
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-code"></i>
+            Módulo 3: Proyecto Práctico
+          </h2>
+          <div class="section-progress">0/6 completados</div>
+        </div>
+        
+        <div class="video-grid">
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">35:20</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">11. Planificación del Proyecto</div>
+              <div class="video-description">Diseño y estructura de una página web completa</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa Módulo 2</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="video-card locked">
+            <div class="video-thumbnail">
+              <i class="fas fa-play"></i>
+              <div class="video-duration">28:15</div>
+              <div class="lock-overlay">
+                <i class="fas fa-lock"></i>
+              </div>
+            </div>
+            <div class="video-info">
+              <div class="video-title">12. Creando el Header</div>
+              <div class="video-description">Navegación y header responsivo</div>
+              <div class="video-meta">
+                <div class="video-status status-locked">
+                  <i class="fas fa-lock"></i> Bloqueado
+                </div>
+                <span>Completa videos anteriores</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Datos de cursos disponibles
+    const courses = {
+      'html-css': {
+        title: 'HTML y CSS desde Cero',
+        description: 'Aprende los fundamentos del desarrollo web creando sitios modernos y responsivos',
+        icon: 'fab fa-html5',
+        duration: '25 horas',
+        videoCount: '24 videos',
+        studentCount: '2,341 estudiantes'
+      },
+      'javascript': {
+        title: 'JavaScript Moderno',
+        description: 'Domina JavaScript ES6+, DOM, APIs y frameworks como React',
+        icon: 'fab fa-js-square',
+        duration: '40 horas',
+        videoCount: '32 videos',
+        studentCount: '1,876 estudiantes'
+      },
+      'python': {
+        title: 'Python para Principiantes',
+        description: 'Aprende Python desde cero: sintaxis, estructuras de datos, POO',
+        icon: 'fab fa-python',
+        duration: '35 horas',
+        videoCount: '28 videos',
+        studentCount: '3,124 estudiantes'
+      }
+    };
+
+    // Obtener parámetro de curso de la URL
+    function getCourseFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get('curso') || 'html-css';
+    }
+
+    // Cargar información del curso
+    function loadCourseInfo() {
+      const courseId = getCourseFromURL();
+      const course = courses[courseId];
+      
+      if (course) {
+        document.getElementById('courseTitle').textContent = course.title;
+        document.getElementById('courseDescription').textContent = course.description;
+        document.getElementById('courseIcon').innerHTML = `<i class="${course.icon}"></i>`;
+        document.getElementById('courseDuration').textContent = course.duration;
+        document.getElementById('videoCount').textContent = course.videoCount;
+        document.getElementById('studentCount').textContent = course.studentCount;
+      }
+    }
+
+    // Reproducir video
+    function playVideo(videoId) {
+      // Verificar si el video está desbloqueado
+      const videoCard = event.currentTarget;
+      if (videoCard.classList.contains('locked')) {
+        alert('Este video está bloqueado. Completa los videos anteriores o suscríbete para acceder.');
+        return;
+      }
+
+      // Simular reproducción de video
+      alert(`Reproduciendo video: ${videoId}\n\nEn una implementación real, aquí se abriría el reproductor de video.`);
+      
+      // Marcar como completado (simulación)
+      const statusElement = videoCard.querySelector('.video-status');
+      if (statusElement.classList.contains('status-current')) {
+        statusElement.innerHTML = '<i class="fas fa-check-circle"></i> Completado';
+        statusElement.className = 'video-status status-completed';
+        
+        // Desbloquear siguiente video
+        const nextVideo = videoCard.parentElement.querySelector('.video-card.locked');
+        if (nextVideo) {
+          nextVideo.classList.remove('locked');
+          const lockOverlay = nextVideo.querySelector('.lock-overlay');
+          if (lockOverlay) lockOverlay.remove();
+          
+          const nextStatus = nextVideo.querySelector('.video-status');
+          nextStatus.innerHTML = '<i class="fas fa-play-circle"></i> Disponible';
+          nextStatus.className = 'video-status status-current';
+        }
+      }
+    }
+
+    // Verificar suscripción (simulación)
+    function checkSubscription() {
+      // En una implementación real, esto verificaría la suscripción del usuario
+      const isSubscribed = true; // Cambiar a false para mostrar banner de upgrade
+      
+      if (!isSubscribed) {
+        document.getElementById('upgradeBanner').style.display = 'block';
+        // Bloquear videos premium
+        document.querySelectorAll('.video-card:nth-child(n+4)').forEach(card => {
+          card.classList.add('locked');
+        });
+      }
+    }
+
+    // Inicializar página
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCourseInfo();
+      checkSubscription();
+    });
+  </script>
+</body>
+</html>

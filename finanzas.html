@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan Financiero - Edu-Clic</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background-color: #121212;
+      color: #f5f5f5;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #1e1e1e;
+      padding: 15px;
+      text-align: center;
+      font-size: 1.2em;
+    }
+    header a {
+      color: #ffcc00;
+      margin: 0 10px;
+      text-decoration: none;
+    }
+    h1, h2 {
+      text-align: center;
+      color: #ffcc00;
+    }
+    table {
+      width: 95%;
+      margin: 20px auto;
+      border-collapse: collapse;
+      background-color: #1e1e1e;
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #333;
+      text-align: center;
+    }
+    th {
+      background-color: #ffcc00;
+      color: #000;
+    }
+    tr:nth-child(even) {
+      background-color: #2c2c2c;
+    }
+    .info {
+      width: 90%;
+      margin: 20px auto;
+      background-color: #1e1e1e;
+      padding: 15px;
+      border-radius: 8px;
+    }
+    .highlight {
+      color: #ffcc00;
+      font-weight: bold;
+    }
+    .selector {
+      text-align: center;
+      margin: 20px;
+    }
+    select {
+      padding: 5px;
+      font-size: 1em;
+    }
+    .aviso-18 {
+      background-color: #b00020;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">Inicio</a>
+  <a href="finanzas.html">Plan Financiero</a>
+</header>
+
+<div class="aviso-18">⚠ Contenido para mayores de 18 años</div>
+
+<h1>Plan Financiero - Plataforma Edu-Clic</h1>
+
+<div class="info">
+  <p>En Edu-Clic el estudiante puede pagar de forma <span class="highlight">mensual</span> o <span class="highlight">anual</span>. A continuación, se muestra la proyección de ventas y distribución de ganancias a 5 años.</p>
+</div>
+
+<div class="selector">
+  <label for="tipoPago">Selecciona tipo de pago:</label>
+  <select id="tipoPago">
+    <option value="mensual">Mensual ($100,000)</option>
+    <option value="anual" selected>Anual ($1,200,000)</option>
+  </select>
+</div>
+
+<h2>Presupuesto y Proyección (5 años)</h2>
+<table id="tablaProyeccion">
+  <!-- Se llenará con JavaScript -->
+</table>
+
+<h2>Desglose de Nómina</h2>
+<table>
+  <tr>
+    <th>Cargo</th>
+    <th>Sueldo mensual</th>
+    <th>Sueldo anual</th>
+  </tr>
+  <tr><td>Creador 1</td><td>$2,000,000</td><td>$24,000,000</td></tr>
+  <tr><td>Creador 2</td><td>$1,500,000</td><td>$18,000,000</td></tr>
+  <tr><td>Desarrollador</td><td>$1,500,000</td><td>$18,000,000</td></tr>
+  <tr><td>Gestor de contenidos</td><td>$500,000</td><td>$6,000,000</td></tr>
+  <tr><td>Soporte técnico</td><td>$500,000</td><td>$6,000,000</td></tr>
+  <tr><th>Total</th><th>$6,000,000</th><th>$72,000,000</th></tr>
+</table>
+
+<h2>Diferencias frente a otras plataformas</h2>
+<table>
+  <tr>
+    <th>Característica</th>
+    <th>Edu-Clic</th>
+    <th>Otras plataformas</th>
+  </tr>
+  <tr>
+    <td>Modelo de pago</td>
+    <td>Suscripción mensual/anual, pago directo a creadores y profesores</td>
+    <td>Pagos por curso o suscripción global, altas comisiones</td>
+  </tr>
+  <tr>
+    <td>Participación del profesor</td>
+    <td>40% de utilidades netas</td>
+    <td>5% a 30% del precio del curso</td>
+  </tr>
+  <tr>
+    <td>Áreas de conocimiento</td>
+    <td>Todas las áreas</td>
+    <td>Nichos específicos</td>
+  </tr>
+  <tr>
+    <td>Intercambio de conocimiento</td>
+    <td>Bidireccional: profesores y estudiantes colaboran</td>
+    <td>Unidireccional</td>
+  </tr>
+</table>
+
+<h2>Visión</h2>
+<div class="info">
+  Ser la plataforma educativa líder en Latinoamérica que conecta a estudiantes y expertos en todas las áreas del conocimiento, fomentando el aprendizaje colaborativo y accesible para todos.
+</div>
+
+<h2>Misión</h2>
+<div class="info">
+  Proveer una plataforma intuitiva y segura donde estudiantes y profesores compartan, creen y accedan a cursos de alta calidad, asegurando oportunidades educativas para mayores de 18 años en cualquier parte del mundo.
+</div>
+
+<h2>Objetivo</h2>
+<div class="info">
+  Alcanzar una comunidad activa de más de 50,000 estudiantes en 5 años, diversificando las áreas de estudio y garantizando un reparto justo de ganancias entre creadores y docentes.
+</div>
+
+<script>
+  const estudiantesBase = 100;
+  const crecimiento = 0.30;
+  const precioMensual = 100000;
+  const precioAnual = 1200000;
+  const nominaAnual = 72000000;
+  const porcProduccion = 0.12;
+  const porcVentas = 0.10;
+  const porcAdmin = 0.08;
+  const porcCreadores = 0.60;
+  const porcProfesores = 0.40;
+
+  function formatear(num) {
+    return "$" + num.toLocaleString('es-CO');
+  }
+
+  function generarTabla(tipoPago) {
+    let precio = tipoPago === "mensual" ? precioMensual * 12 : precioAnual;
+    let html = `
+      <tr>
+        <th>Año</th>
+        <th>Estudiantes</th>
+        <th>Ingresos anuales</th>
+        <th>Producción (12%)</th>
+        <th>Gastos de ventas (10%)</th>
+        <th>Gastos admin (8%)</th>
+        <th>Nómina anual</th>
+        <th>Utilidad neta</th>
+        <th>Creadores (60%)</th>
+        <th>Profesores (40%)</th>
+      </tr>
+    `;
+    for (let año = 1; año <= 5; año++) {
+      let estudiantes = Math.round(estudiantesBase * Math.pow(1 + crecimiento, año - 1));
+      let ingresos = estudiantes * precio;
+      let produccion = ingresos * porcProduccion;
+      let ventas = ingresos * porcVentas;
+      let admin = ingresos * porcAdmin;
+      let utilidad = ingresos - produccion - ventas - admin - nominaAnual;
+      let creadores = utilidad * porcCreadores;
+      let profesores = utilidad * porcProfesores;
+      html += `
+        <tr>
+          <td>${año}</td>
+          <td>${estudiantes}</td>
+          <td>${formatear(ingresos)}</td>
+          <td>${formatear(produccion)}</td>
+          <td>${formatear(ventas)}</td>
+          <td>${formatear(admin)}</td>
+          <td>${formatear(nominaAnual)}</td>
+          <td>${formatear(utilidad)}</td>
+          <td>${formatear(creadores)}</td>
+          <td>${formatear(profesores)}</td>
+        </tr>
+      `;
+    }
+    document.getElementById("tablaProyeccion").innerHTML = html;
+  }
+
+  document.getElementById("tipoPago").addEventListener("change", (e) => {
+    generarTabla(e.target.value);
+  });
+
+  // Inicial
+  generarTabla("anual");
+</script>
+
+</body>
+</html>
