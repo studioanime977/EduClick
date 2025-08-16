@@ -801,18 +801,26 @@ mk<!DOCTYPE html>
     function checkUserAuth() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       const userName = localStorage.getItem('userName');
-      
+      const userType = localStorage.getItem('userType') || 'estudiante';
+      const userRoles = JSON.parse(localStorage.getItem('userRoles') || '["estudiante"]');
       const authButtons = document.getElementById('auth-buttons');
       const userMenu = document.getElementById('user-menu');
       const userNameElement = document.getElementById('user-name');
       
       if (isLoggedIn === 'true' && userName) {
-        // Usuario logueado - mostrar menú de usuario
         authButtons.style.display = 'none';
         userMenu.style.display = 'flex';
-        userNameElement.textContent = userName;
+        
+        // Personalizar nombre según el tipo de usuario
+        let displayName = userName;
+        if (userType === 'instructor') {
+          displayName += ' (Instructor)';
+        }
+        userNameElement.textContent = displayName;
+        
+        // Actualizar opciones del dropdown según los roles
+        updateUserDropdownOptions(userRoles);
       } else {
-        // Usuario no logueado - mostrar botones de login/registro
         authButtons.style.display = 'flex';
         userMenu.style.display = 'none';
       }
@@ -840,6 +848,77 @@ mk<!DOCTYPE html>
       arrow.classList.toggle('rotated');
     }
 
+    // Función para actualizar las opciones del dropdown según los roles
+    function updateUserDropdownOptions(userRoles) {
+      const dropdown = document.getElementById('user-dropdown');
+      if (!dropdown) return;
+      
+      let dropdownHTML = `
+        <a href="HTML/app.html"><i class="fas fa-tachometer-alt"></i> Mi Dashboard</a>
+        <a href="#"><i class="fas fa-user"></i> Mi Perfil</a>
+        <a href="#"><i class="fas fa-book"></i> Mis Cursos</a>
+      `;
+      
+      // Agregar opciones específicas para instructores
+      if (userRoles.includes('instructor')) {
+        dropdownHTML += `
+          <div class="dropdown-separator"></div>
+          <div class="dropdown-section-title">Panel de Instructor</div>
+          <a href="#"><i class="fas fa-chalkboard-teacher"></i> Crear Curso</a>
+          <a href="#"><i class="fas fa-chart-line"></i> Analíticas</a>
+          <a href="#"><i class="fas fa-users"></i> Mis Estudiantes</a>
+          <a href="#"><i class="fas fa-comments"></i> Mensajes</a>
+        `;
+      }
+      
+      dropdownHTML += `
+        <div class="dropdown-separator"></div>
+        <a href="#" onclick="cerrarSesion()" class="logout-btn">
+          <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </a>
+      `;
+      
+      dropdown.innerHTML = dropdownHTML;
+      
+      // Agregar estilos para las nuevas opciones
+      if (userRoles.includes('instructor') && !document.getElementById('instructor-dropdown-styles')) {
+        const instructorStyles = `
+          <style id="instructor-dropdown-styles">
+            .dropdown-separator {
+              height: 1px;
+              background: #e9ecef;
+              margin: 0.5rem 0;
+            }
+            
+            .dropdown-section-title {
+              padding: 0.5rem 1rem;
+              font-size: 0.8rem;
+              font-weight: 600;
+              color: #667eea;
+              text-transform: uppercase;
+              letter-spacing: 0.5px;
+              background: #f8f9fa;
+            }
+            
+            .user-dropdown a:hover {
+              background: #f8f9fa;
+              color: #667eea;
+            }
+            
+            .logout-btn {
+              color: #dc3545 !important;
+            }
+            
+            .logout-btn:hover {
+              background: #dc3545 !important;
+              color: white !important;
+            }
+          </style>
+        `;
+        document.head.insertAdjacentHTML('beforeend', instructorStyles);
+      }
+    }
+    
     // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', function(event) {
       const userProfileContainer = document.querySelector('.user-profile-container');

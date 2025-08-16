@@ -122,8 +122,8 @@
       <label for="tipoCuenta">Tipo de cuenta</label>
       <select id="tipoCuenta" required>
         <option value="">Selecciona una opción</option>
-        <option value="cliente">Cliente</option>
-        <option value="creador">Creador de contenido</option>
+        <option value="estudiante">Estudiante</option>
+        <option value="instructor">Instructor/Profesor</option>
       </select>
 
       <input type="submit" value="Registrarse" />
@@ -155,11 +155,25 @@
       const tipo = document.getElementById("tipoCuenta").value;
 
       if (nombre && email && password && tipo) {
-        tipoSpan.textContent = tipo === "creador" ? "Creador de contenido" : "Cliente";
+        // Configurar roles según el tipo seleccionado
+        let userRoles = ['estudiante']; // Por defecto solo estudiante
+        
+        if (tipo === 'instructor') {
+          userRoles = ['instructor', 'estudiante']; // Instructores tienen acceso dual
+        }
+        
+        // Guardar información del usuario en localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userName', nombre);
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userType', tipo);
+        localStorage.setItem('userRoles', JSON.stringify(userRoles));
+        
+        tipoSpan.textContent = tipo === "instructor" ? "Instructor/Profesor (con acceso como estudiante)" : "Estudiante";
         mensaje.style.display = "block";
 
         setTimeout(() => {
-          window.location.href = "app.html";
+          window.location.href = "../index.html"; // Redirigir a index en lugar de app
         }, 2000);
       }
     });

@@ -140,11 +140,29 @@
       const password = document.getElementById("password").value;
 
       if (email && password) {
+        // Determinar tipo de usuario basado en el email o datos previos
+        let userType = 'estudiante'; // Por defecto estudiante
+        let userRoles = ['estudiante']; // Array de roles
+        
+        // Simular verificación de instructor (en producción sería una consulta a BD)
+        const instructorEmails = [
+          'instructor@educlick.com',
+          'profesor@educlick.com',
+          'teacher@educlick.com',
+          'educlick6@gmail.com'
+        ];
+        
+        if (instructorEmails.includes(email.toLowerCase()) || email.includes('instructor') || email.includes('profesor')) {
+          userType = 'instructor';
+          userRoles = ['instructor', 'estudiante']; // Instructores tienen acceso dual
+        }
+        
         // Guardar información del usuario en localStorage
         localStorage.setItem('isLoggedIn', 'true');
         localStorage.setItem('userName', email.split('@')[0]); // Usar parte antes del @
         localStorage.setItem('userEmail', email);
-        localStorage.setItem('userType', 'estudiante'); // Por defecto estudiante
+        localStorage.setItem('userType', userType);
+        localStorage.setItem('userRoles', JSON.stringify(userRoles)); // Guardar roles como JSON
         
         mensajeLogin.style.display = "block";
 

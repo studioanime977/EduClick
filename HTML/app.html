@@ -657,33 +657,50 @@
 
   <script>
     // Datos del usuario (simulación)
-    const userData = {
+    let userData = {
       name: 'Juan Pérez',
-      type: 'estudiante', // o 'creador'
-      cursosActivos: 3,
-      cursosCompletados: 2,
-      horasEstudio: 45,
-      certificados: 2
+      email: 'juan@email.com',
+      coursesInProgress: 3,
+      coursesCompleted: 5,
+      totalHours: 47,
+      certificates: 2,
+      userType: 'estudiante',
+      roles: ['estudiante']
     };
 
     // Cargar información del usuario
     function loadUserData() {
-      // Obtener datos del localStorage o usar datos por defecto
-      const storedName = localStorage.getItem('userName') || userData.name;
-      const storedType = localStorage.getItem('userType') || userData.type;
+      const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+      const userType = localStorage.getItem('userType') || 'estudiante';
+      const userRoles = JSON.parse(localStorage.getItem('userRoles') || '["estudiante"]');
       
-      document.getElementById('userName').textContent = storedName;
-      document.getElementById('cursosActivos').textContent = userData.cursosActivos;
-      document.getElementById('cursosCompletados').textContent = userData.cursosCompletados;
-      document.getElementById('horasEstudio').textContent = userData.horasEstudio + 'h';
-      document.getElementById('certificados').textContent = userData.certificados;
-      
-      // Actualizar saludo según tipo de usuario
-      const welcomeText = document.querySelector('.welcome-text h1');
-      if (storedType === 'creador') {
-        welcomeText.textContent = '¡Bienvenido, Creador!';
-        document.querySelector('.welcome-text p').textContent = 'Revisa el progreso de tus cursos y estudiantes';
-      }
+      if (userName && userEmail) {
+        userData.name = userName;
+        userData.email = userEmail;
+        userData.userType = userType;
+        userData.roles = userRoles;
+        
+        // Actualizar elementos del DOM
+        document.getElementById('user-name').textContent = userName;
+        
+        // Personalizar saludo según el tipo de usuario
+        let welcomeMessage = `¡Hola, ${userName}!`;
+        if (userType === 'instructor') {
+          welcomeMessage += ' (Instructor con acceso completo como estudiante)';
+        }
+        document.querySelector('.welcome-title').textContent = welcomeMessage;
+        
+        // Mostrar sección especial para instructores
+        if (userRoles.includes('instructor')) {
+          showInstructorSection();
+        }
+        
+        // Actualizar estadísticas (datos simulados)
+        document.querySelector('.stat-value').textContent = userData.coursesInProgress;
+        document.querySelectorAll('.stat-value')[1].textContent = userData.coursesCompleted;
+        document.querySelectorAll('.stat-value')[2].textContent = userData.totalHours;
+        document.querySelectorAll('.stat-value')[3].textContent = userData.certificates;
     }
 
     // Cerrar sesión
@@ -706,6 +723,152 @@
       return true;
     }
 
+    // Función para mostrar sección de instructor
+    function showInstructorSection() {
+      const instructorSection = document.createElement('div');
+      instructorSection.className = 'section instructor-section';
+      instructorSection.innerHTML = `
+        <div class="section-header">
+          <h2 class="section-title">
+            <i class="fas fa-chalkboard-teacher"></i>
+            Panel de Instructor
+          </h2>
+          <span class="instructor-badge">Instructor</span>
+        </div>
+        <div class="instructor-stats">
+          <div class="instructor-stat">
+            <div class="stat-icon"><i class="fas fa-users"></i></div>
+            <div class="stat-value">24</div>
+            <div class="stat-label">Estudiantes Activos</div>
+          </div>
+          <div class="instructor-stat">
+            <div class="stat-icon"><i class="fas fa-play-circle"></i></div>
+            <div class="stat-value">8</div>
+            <div class="stat-label">Cursos Creados</div>
+          </div>
+          <div class="instructor-stat">
+            <div class="stat-icon"><i class="fas fa-star"></i></div>
+            <div class="stat-value">4.8</div>
+            <div class="stat-label">Calificación Promedio</div>
+          </div>
+          <div class="instructor-stat">
+            <div class="stat-icon"><i class="fas fa-dollar-sign"></i></div>
+            <div class="stat-value">$2.4M</div>
+            <div class="stat-label">Ingresos COP</div>
+          </div>
+        </div>
+        <div class="instructor-actions">
+          <a href="#" class="btn btn-primary"><i class="fas fa-plus"></i> Crear Nuevo Curso</a>
+          <a href="#" class="btn btn-outline"><i class="fas fa-chart-line"></i> Ver Analíticas</a>
+          <a href="#" class="btn btn-outline"><i class="fas fa-comments"></i> Mensajes de Estudiantes</a>
+        </div>
+        <div class="instructor-note">
+          <i class="fas fa-info-circle"></i>
+          <strong>Nota:</strong> Como instructor, tienes acceso completo a todos los cursos como estudiante para verificar la calidad del contenido y la experiencia de aprendizaje.
+        </div>
+      `;
+      
+      // Insertar después del header del dashboard
+      const dashboardHeader = document.querySelector('.dashboard-header');
+      dashboardHeader.insertAdjacentElement('afterend', instructorSection);
+      
+      // Añadir estilos CSS para la sección de instructor
+      const instructorStyles = `
+        <style>
+          .instructor-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+          }
+          
+          .instructor-section .section-title {
+            color: white;
+          }
+          
+          .instructor-badge {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+          }
+          
+          .instructor-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+          }
+          
+          .instructor-stat {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+          }
+          
+          .instructor-stat .stat-icon {
+            background: rgba(255,255,255,0.2);
+            margin: 0 auto 1rem;
+          }
+          
+          .instructor-stat .stat-value {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+          }
+          
+          .instructor-stat .stat-label {
+            color: rgba(255,255,255,0.8);
+          }
+          
+          .instructor-actions {
+            display: flex;
+            gap: 1rem;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+          }
+          
+          .instructor-actions .btn {
+            background: rgba(255,255,255,0.2);
+            border-color: rgba(255,255,255,0.3);
+            color: white;
+          }
+          
+          .instructor-actions .btn:hover {
+            background: rgba(255,255,255,0.3);
+            transform: translateY(-2px);
+          }
+          
+          .instructor-note {
+            background: rgba(255,255,255,0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            border-left: 4px solid rgba(255,255,255,0.3);
+            margin-top: 1rem;
+          }
+          
+          .instructor-note i {
+            color: rgba(255,255,255,0.8);
+            margin-right: 0.5rem;
+          }
+          
+          @media (max-width: 768px) {
+            .instructor-actions {
+              flex-direction: column;
+            }
+            
+            .instructor-stats {
+              grid-template-columns: repeat(2, 1fr);
+            }
+          }
+        </style>
+      `;
+      
+      document.head.insertAdjacentHTML('beforeend', instructorStyles);
+    }
+    
     // Inicializar página
     document.addEventListener('DOMContentLoaded', function() {
       if (checkAuth()) {
