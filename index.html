@@ -57,6 +57,7 @@ mk<!DOCTYPE html>
       font-size: 2rem;
       background: linear-gradient(45deg, #667eea, #764ba2);
       -webkit-background-clip: text;
+      background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     
@@ -175,70 +176,181 @@ mk<!DOCTYPE html>
       top: 100%;
       right: 0;
       background: white;
-      border-radius: 10px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-      min-width: 200px;
+      border-radius: 15px;
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1), 0 5px 15px rgba(0, 0, 0, 0.08);
+      min-width: 280px;
       opacity: 0;
       visibility: hidden;
-      transform: translateY(-10px);
-      transition: all 0.3s ease;
+      transform: translateY(-15px) scale(0.95);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
       z-index: 1000;
-      margin-top: 0.5rem;
+      margin-top: 0.75rem;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+    }
+    
+    .user-dropdown::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      right: 20px;
+      width: 16px;
+      height: 16px;
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      border-bottom: none;
+      border-right: none;
+      transform: rotate(45deg);
+      z-index: -1;
     }
     
     .user-dropdown.show {
       opacity: 1;
       visibility: visible;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+    }
+    
+    .dropdown-header {
+      padding: 1.25rem 1.5rem 0.75rem;
+      border-bottom: 1px solid #f0f0f0;
+      background: linear-gradient(135deg, #f8f9ff 0%, #ffffff 100%);
+    }
+    
+    .dropdown-user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    
+    .dropdown-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    
+    .dropdown-user-details h4 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .dropdown-user-details p {
+      margin: 0;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .dropdown-body {
+      padding: 0.5rem 0;
     }
     
     .dropdown-item {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
+      gap: 1rem;
+      padding: 0.875rem 1.5rem;
       color: #333;
       text-decoration: none;
-      transition: background-color 0.2s ease;
+      transition: all 0.2s ease;
       border: none;
       background: none;
       width: 100%;
       text-align: left;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       cursor: pointer;
-    }
-    
-    .dropdown-item:first-child {
-      border-radius: 10px 10px 0 0;
-    }
-    
-    .dropdown-item:last-child {
-      border-radius: 0 0 10px 10px;
+      position: relative;
     }
     
     .dropdown-item:hover {
-      background-color: #f8f9fa;
+      background: linear-gradient(90deg, rgba(102, 126, 234, 0.08) 0%, rgba(102, 126, 234, 0.04) 100%);
+      color: #667eea;
+      transform: translateX(4px);
     }
     
     .dropdown-item i {
-      font-size: 1rem;
-      width: 16px;
+      font-size: 1.1rem;
+      width: 20px;
       text-align: center;
+      color: #667eea;
     }
     
     .dropdown-divider {
       height: 1px;
-      background-color: #e9ecef;
-      margin: 0.5rem 0;
+      background: linear-gradient(90deg, transparent 0%, #e9ecef 50%, transparent 100%);
+      margin: 0.5rem 1.5rem;
+    }
+    
+    .dropdown-section-title {
+      padding: 0.75rem 1.5rem 0.25rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: #667eea;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
     .logout-btn {
       color: #dc3545;
+      border-top: 1px solid #f0f0f0;
+      margin-top: 0.5rem;
     }
     
     .logout-btn:hover {
-      background-color: #f8f9fa;
-      color: #c82333;
+      background: linear-gradient(90deg, rgba(220, 53, 69, 0.08) 0%, rgba(220, 53, 69, 0.04) 100%);
+      color: #dc3545;
+    }
+    
+    .logout-btn i {
+      color: #dc3545;
+    }
+    
+    /* Hero Section */
+    /* Main Content Styles */
+    main {
+      margin-top: 80px;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .section-header h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    .section-header p {
+      font-size: 1.2rem;
+      color: #666;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .gradient-text {
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
     
     /* Hero Section */
@@ -247,11 +359,484 @@ mk<!DOCTYPE html>
       min-height: 100vh;
       display: flex;
       align-items: center;
-      justify-content: center;
-      text-align: center;
       color: white;
       position: relative;
       overflow: hidden;
+    }
+    
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('img/pattern.svg') repeat;
+      opacity: 0.1;
+    }
+    
+    .hero-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    
+    .hero-text p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+    
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    
+    .hero-stats {
+      display: flex;
+      gap: 2rem;
+    }
+    
+    .stat {
+      text-align: center;
+    }
+    
+    .stat-number {
+      display: block;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .hero-image {
+      text-align: center;
+    }
+    
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+    
+    /* Features Section */
+    .features {
+      padding: 5rem 0;
+      background: #f8f9fa;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .feature-card {
+      background: white;
+      padding: 2.5rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .feature-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.5rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2rem;
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    .feature-card p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    /* Courses Section */
+    .courses {
+      padding: 5rem 0;
+    }
+    
+    .courses-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .course-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+    }
+    
+    .course-image {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+    
+    .course-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .course-badge {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: #ff6b6b;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+    
+    .course-content {
+      padding: 1.5rem;
+    }
+    
+    .course-category {
+      color: #667eea;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.5rem;
+    }
+    
+    .course-content h3 {
+      font-size: 1.3rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+    
+    .course-content p {
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 1.5rem;
+    }
+    
+    .course-meta {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 0.9rem;
+      color: #666;
+    }
+    
+    .course-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    
+    .course-price {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .price-original {
+      text-decoration: line-through;
+      color: #999;
+      font-size: 0.9rem;
+    }
+    
+    .price-current {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #667eea;
+    }
+    
+    .courses-cta {
+      text-align: center;
+    }
+    
+    /* Stats Section */
+    .stats {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+    }
+    
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+    }
+    
+    .stat-item {
+      text-align: center;
+    }
+    
+    .stat-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1rem;
+      background: rgba(255,255,255,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+    }
+    
+    .stat-content h3 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-content p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    
+    /* About Section */
+    .about {
+      padding: 5rem 0;
+    }
+    
+    .about-content {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    
+    .about-description {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #666;
+    }
+    
+    .about-description p {
+      margin-bottom: 1.5rem;
+    }
+    
+    .about-features {
+      margin-top: 2rem;
+    }
+    
+    .about-feature {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    
+    .about-feature i {
+      color: #667eea;
+      font-size: 1.2rem;
+    }
+    
+    .about-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    /* Vision, Mission, Objectives Styles */
+    .vision-mission-section {
+      margin: 2rem 0;
+    }
+    
+    .vision-box, .mission-box, .objectives-box {
+      background: #f8f9ff;
+      border-left: 4px solid #667eea;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+      border-radius: 8px;
+    }
+    
+    .vision-box h4, .mission-box h4, .objectives-box h4 {
+      color: #667eea;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .vision-box h4 i {
+      color: #667eea;
+    }
+    
+    .mission-box h4 i {
+      color: #667eea;
+    }
+    
+    .objectives-box h4 i {
+      color: #667eea;
+    }
+    
+    .objectives-box ul {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .objectives-box li {
+      padding: 0.5rem 0;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+    
+    .objectives-box li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      color: #667eea;
+      font-weight: bold;
+    }
+    
+    /* Testimonials Section */
+    .testimonials {
+      padding: 5rem 0;
+      background: #f8f9fa;
+    }
+    
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+    
+    .testimonial-card {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    }
+    
+    .testimonial-content {
+      margin-bottom: 1.5rem;
+    }
+    
+    .stars {
+      color: #ffc107;
+      margin-bottom: 1rem;
+    }
+    
+    .testimonial-content p {
+      font-style: italic;
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .testimonial-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    
+    .author-info h4 {
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      color: #333;
+    }
+    
+    .author-info span {
+      font-size: 0.9rem;
+      color: #667eea;
+    }
+    
+    /* CTA Section */
+    .cta {
+      padding: 5rem 0;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: white;
+      text-align: center;
+    }
+    
+    .cta-content h2 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+    
+    .cta-content p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    
+    .cta-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    
+    .cta-guarantee {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      opacity: 0.8;
+    }
+    
+    .cta-guarantee i {
+      font-size: 1.1rem;
     }
     
     .hero::before {
@@ -711,6 +1296,7 @@ mk<!DOCTYPE html>
       .cta p {
         font-size: 1rem;
         margin-bottom: 2rem;
+        text-align: center;
       }
       
       .footer-content {
@@ -796,7 +1382,7 @@ mk<!DOCTYPE html>
   <header>
     <nav class="navbar">
       <a href="#" class="logo">
-        <i class="fas fa-graduation-cap"></i>
+        <img src="img/logo1.jpg" alt="EduClick Logo" style="height: 40px; width: auto; margin-right: 0.5rem;">
         EduClick
       </a>
       <ul class="nav-links">
@@ -824,9 +1410,61 @@ mk<!DOCTYPE html>
             <i class="fas fa-chevron-down dropdown-arrow"></i>
           </div>
           <div class="user-dropdown" id="user-dropdown">
-            <a href="HTML/app.html"><i class="fas fa-tachometer-alt"></i> Mi Dashboard</a>
-            <a href="#"><i class="fas fa-user"></i> Mi Perfil</a>
-            <a href="#"><i class="fas fa-book"></i> Mis Cursos</a>
+            <div class="dropdown-header">
+              <div class="dropdown-user-info">
+                <div class="dropdown-avatar" id="dropdown-avatar">
+                  <i class="fas fa-user"></i>
+                </div>
+                <div class="dropdown-user-details">
+                  <h4 id="dropdown-user-name">Usuario</h4>
+                  <p id="dropdown-user-email">usuario@email.com</p>
+                </div>
+              </div>
+            </div>
+            
+            <div class="dropdown-body">
+              <a href="HTML/app.html" class="dropdown-item">
+                <i class="fas fa-tachometer-alt"></i>
+                <span>Mi Dashboard</span>
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-user"></i>
+                <span>Mi Perfil</span>
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-book"></i>
+                <span>Mis Cursos</span>
+              </a>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-certificate"></i>
+                <span>Mis Certificados</span>
+              </a>
+              
+              <div class="dropdown-divider"></div>
+              <div class="dropdown-section-title" id="instructor-section" style="display: none;">Panel de Instructor</div>
+              <a href="#" class="dropdown-item instructor-item" style="display: none;">
+                <i class="fas fa-chalkboard-teacher"></i>
+                <span>Crear Curso</span>
+              </a>
+              <a href="#" class="dropdown-item instructor-item" style="display: none;">
+                <i class="fas fa-chart-line"></i>
+                <span>Analíticas</span>
+              </a>
+              <a href="#" class="dropdown-item instructor-item" style="display: none;">
+                <i class="fas fa-users"></i>
+                <span>Mis Estudiantes</span>
+              </a>
+              
+              <div class="dropdown-divider"></div>
+              <a href="#" class="dropdown-item">
+                <i class="fas fa-cog"></i>
+                <span>Configuración</span>
+              </a>
+              <a href="#" onclick="cerrarSesion()" class="dropdown-item logout-btn">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Cerrar Sesión</span>
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -840,7 +1478,7 @@ mk<!DOCTYPE html>
   <div class="mobile-menu" id="mobile-menu">
     <div class="mobile-menu-header">
       <div class="logo">
-        <i class="fas fa-graduation-cap"></i>
+        <img src="img/logo1.jpg" alt="EduClick Logo" style="height: 30px; width: auto; margin-right: 0.5rem;">
         EduClick
       </div>
       <button class="mobile-menu-close" onclick="closeMobileMenu()">
@@ -880,6 +1518,402 @@ mk<!DOCTYPE html>
       </div>
     </div>
   </div>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-text">
+            <h1>Transforma tu Futuro con <span class="gradient-text">Tecnología</span></h1>
+            <p>Aprende las habilidades más demandadas del mercado con nuestros cursos prácticos y certificaciones reconocidas. Únete a más de 10,000 estudiantes que ya están construyendo su carrera en tecnología.</p>
+            <div class="hero-buttons">
+              <a href="HTML/cursos.html" class="btn btn-primary">
+                <i class="fas fa-play"></i>
+                Comenzar Ahora
+              </a>
+              <a href="#cursos" class="btn btn-outline">
+                <i class="fas fa-book"></i>
+                Ver Cursos
+              </a>
+            </div>
+            <div class="hero-stats">
+              <div class="stat">
+                <span class="stat-number">10,000+</span>
+                <span class="stat-label">Estudiantes</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">50+</span>
+                <span class="stat-label">Cursos</span>
+              </div>
+              <div class="stat">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Satisfacción</span>
+              </div>
+            </div>
+          </div>
+          <div class="hero-image">
+            <img src="img/hero-tech.jpg" alt="Estudiante aprendiendo tecnología" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+      <div class="container">
+        <div class="section-header">
+          <h2>¿Por qué elegir EduClick?</h2>
+          <p>Ofrecemos la mejor experiencia de aprendizaje en tecnología con metodologías probadas</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-laptop-code"></i>
+            </div>
+            <h3>Aprendizaje Práctico</h3>
+            <p>Proyectos reales que puedes agregar a tu portafolio profesional desde el primer día.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-users"></i>
+            </div>
+            <h3>Mentores Expertos</h3>
+            <p>Aprende de profesionales con años de experiencia en las mejores empresas tecnológicas.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-certificate"></i>
+            </div>
+            <h3>Certificaciones</h3>
+            <p>Obtén certificados reconocidos por la industria que validen tus nuevas habilidades.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-clock"></i>
+            </div>
+            <h3>Horarios Flexibles</h3>
+            <p>Estudia a tu ritmo con acceso 24/7 a todo el contenido y materiales del curso.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <h3>Empleabilidad</h3>
+            <p>Bolsa de trabajo exclusiva y preparación para entrevistas técnicas.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">
+              <i class="fas fa-mobile-alt"></i>
+            </div>
+            <h3>Acceso Móvil</h3>
+            <p>Aprende desde cualquier dispositivo con nuestra plataforma optimizada.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Courses Section -->
+    <section class="courses" id="cursos">
+      <div class="container">
+        <div class="section-header">
+          <h2>Cursos Destacados</h2>
+          <p>Programas diseñados para llevarte desde principiante hasta profesional</p>
+        </div>
+        <div class="courses-grid">
+          <div class="course-card">
+            <div class="course-image">
+              <img src="img/curso-web.jpg" alt="Desarrollo Web" />
+              <div class="course-badge">Más Popular</div>
+            </div>
+            <div class="course-content">
+              <div class="course-category">Desarrollo Web</div>
+              <h3>Full Stack Web Developer</h3>
+              <p>Aprende HTML, CSS, JavaScript, React, Node.js y MongoDB para crear aplicaciones web completas.</p>
+              <div class="course-meta">
+                <span><i class="fas fa-clock"></i> 120 horas</span>
+                <span><i class="fas fa-users"></i> 2,500+ estudiantes</span>
+                <span><i class="fas fa-star"></i> 4.9/5</span>
+              </div>
+              <div class="course-price">
+                <span class="price-original">$450,000 COP</span>
+                <span class="price-current">$299,000 COP</span>
+              </div>
+              <a href="HTML/ver curso.html" class="btn btn-primary">Ver Curso</a>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="course-image">
+              <img src="img/curso-data.jpg" alt="Análisis de Datos" />
+            </div>
+            <div class="course-content">
+              <div class="course-category">Data Science</div>
+              <h3>Análisis de Datos con Python</h3>
+              <p>Domina Python, Pandas, NumPy y visualización de datos para convertirte en Data Analyst.</p>
+              <div class="course-meta">
+                <span><i class="fas fa-clock"></i> 100 horas</span>
+                <span><i class="fas fa-users"></i> 1,800+ estudiantes</span>
+                <span><i class="fas fa-star"></i> 4.8/5</span>
+              </div>
+              <div class="course-price">
+                <span class="price-original">$380,000 COP</span>
+                <span class="price-current">$249,000 COP</span>
+              </div>
+              <a href="HTML/ver curso.html" class="btn btn-primary">Ver Curso</a>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="course-image">
+              <img src="img/curso-mobile.jpg" alt="Desarrollo Móvil" />
+            </div>
+            <div class="course-content">
+              <div class="course-category">Desarrollo Móvil</div>
+              <h3>Apps Móviles con React Native</h3>
+              <p>Crea aplicaciones móviles nativas para iOS y Android con una sola base de código.</p>
+              <div class="course-meta">
+                <span><i class="fas fa-clock"></i> 90 horas</span>
+                <span><i class="fas fa-users"></i> 1,200+ estudiantes</span>
+                <span><i class="fas fa-star"></i> 4.7/5</span>
+              </div>
+              <div class="course-price">
+                <span class="price-original">$320,000 COP</span>
+                <span class="price-current">$199,000 COP</span>
+              </div>
+              <a href="HTML/ver curso.html" class="btn btn-primary">Ver Curso</a>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="course-image">
+              <img src="img/curso-ai.jpg" alt="Inteligencia Artificial" />
+              <div class="course-badge">Nuevo</div>
+            </div>
+            <div class="course-content">
+              <div class="course-category">Inteligencia Artificial</div>
+              <h3>Machine Learning Fundamentals</h3>
+              <p>Introducción práctica al Machine Learning con Python, scikit-learn y TensorFlow.</p>
+              <div class="course-meta">
+                <span><i class="fas fa-clock"></i> 110 horas</span>
+                <span><i class="fas fa-users"></i> 800+ estudiantes</span>
+                <span><i class="fas fa-star"></i> 4.9/5</span>
+              </div>
+              <div class="course-price">
+                <span class="price-original">$520,000 COP</span>
+                <span class="price-current">$349,000 COP</span>
+              </div>
+              <a href="HTML/ver curso.html" class="btn btn-primary">Ver Curso</a>
+            </div>
+          </div>
+        </div>
+        <div class="courses-cta">
+          <a href="HTML/cursos.html" class="btn btn-outline">Ver Todos los Cursos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-graduation-cap"></i>
+            </div>
+            <div class="stat-content">
+              <h3>10,000+</h3>
+              <p>Estudiantes Graduados</p>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-briefcase"></i>
+            </div>
+            <div class="stat-content">
+              <h3>85%</h3>
+              <p>Tasa de Empleabilidad</p>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-award"></i>
+            </div>
+            <div class="stat-content">
+              <h3>50+</h3>
+              <p>Cursos Disponibles</p>
+            </div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-icon">
+              <i class="fas fa-star"></i>
+            </div>
+            <div class="stat-content">
+              <h3>4.8/5</h3>
+              <p>Satisfacción Promedio</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" id="nosotros">
+      <div class="container">
+        <div class="about-content">
+          <div class="about-text">
+            <div class="section-header">
+              <h2>Sobre EduClick</h2>
+              <p>Transformando vidas a través de la educación tecnológica</p>
+            </div>
+            <div class="about-description">
+              <div class="vision-mission-section">
+                <div class="vision-box">
+                  <h4><i class="fas fa-eye"></i> Visión</h4>
+                  <p>Ser la plataforma educativa líder en América Latina para la formación tecnológica, democratizando el acceso a la educación digital de calidad y transformando vidas a través del aprendizaje práctico e innovador.</p>
+                </div>
+                
+                <div class="mission-box">
+                  <h4><i class="fas fa-bullseye"></i> Misión</h4>
+                  <p>Proporcionar educación tecnológica accesible, práctica y de alta calidad, conectando estudiantes con oportunidades laborales reales mediante cursos especializados, mentorías personalizadas y certificaciones reconocidas por la industria.</p>
+                </div>
+                
+                <div class="objectives-box">
+                  <h4><i class="fas fa-target"></i> Objetivos</h4>
+                  <ul>
+                    <li>Formar más de 50,000 profesionales tecnológicos para 2027</li>
+                    <li>Mantener una tasa de empleabilidad superior al 85%</li>
+                    <li>Expandir a 10 países de América Latina</li>
+                    <li>Desarrollar alianzas con más de 500 empresas tecnológicas</li>
+                    <li>Ofrecer más de 100 cursos especializados en tecnologías emergentes</li>
+                  </ul>
+                </div>
+              </div>
+              
+              <p>Desde 2020, hemos ayudado a más de 10,000 estudiantes a transformar sus carreras, ofreciendo cursos prácticos que van desde desarrollo web hasta inteligencia artificial, siempre alineados con las demandas reales del mercado laboral.</p>
+              <div class="about-features">
+                <div class="about-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Instructores certificados con experiencia en la industria</span>
+                </div>
+                <div class="about-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Proyectos reales y actualizados con las últimas tecnologías</span>
+                </div>
+                <div class="about-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Soporte personalizado y mentoría uno a uno</span>
+                </div>
+                <div class="about-feature">
+                  <i class="fas fa-check-circle"></i>
+                  <span>Certificaciones reconocidas por empresas líderes</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="about-image">
+            <img src="img/about-team.jpg" alt="Equipo EduClick" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+      <div class="container">
+        <div class="section-header">
+          <h2>Lo que dicen nuestros estudiantes</h2>
+          <p>Historias reales de transformación profesional</p>
+        </div>
+        <div class="testimonials-grid">
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>"Gracias a EduClick pude cambiar completamente mi carrera. En 6 meses pasé de no saber programar a conseguir mi primer trabajo como desarrollador web."</p>
+            </div>
+            <div class="testimonial-author">
+              <img src="img/student1.jpg" alt="Carlos Rodríguez" />
+              <div class="author-info">
+                <h4>Carlos Rodríguez</h4>
+                <span>Desarrollador Frontend en Rappi</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>"Los proyectos prácticos y la mentoría personalizada fueron clave para mi éxito. Ahora trabajo como Data Scientist en una empresa internacional."</p>
+            </div>
+            <div class="testimonial-author">
+              <img src="img/student2.jpg" alt="María González" />
+              <div class="author-info">
+                <h4>María González</h4>
+                <span>Data Scientist en Mercado Libre</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-content">
+              <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+              <p>"La calidad de los instructores y el contenido actualizado me permitieron estar al día con las últimas tecnologías. Totalmente recomendado."</p>
+            </div>
+            <div class="testimonial-author">
+              <img src="img/student3.jpg" alt="Andrés Martínez" />
+              <div class="author-info">
+                <h4>Andrés Martínez</h4>
+                <span>Mobile Developer en Bancolombia</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="container">
+        <div class="cta-content">
+          <h2>¿Listo para transformar tu carrera?</h2>
+          <p>Únete a miles de estudiantes que ya están construyendo su futuro en tecnología. Comienza hoy mismo con nuestros cursos prácticos y certificaciones reconocidas.</p>
+          <div class="cta-buttons">
+            <a href="HTML/registro.html" class="btn btn-primary">
+              <i class="fas fa-rocket"></i>
+              Comenzar Gratis
+            </a>
+            <a href="HTML/cursos.html" class="btn btn-outline">
+              <i class="fas fa-eye"></i>
+              Explorar Cursos
+            </a>
+          </div>
+          <div class="cta-guarantee">
+            <i class="fas fa-shield-alt"></i>
+            <span>Garantía de satisfacción de 30 días</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
   <!-- Footer -->
   <footer class="footer">
@@ -927,39 +1961,6 @@ mk<!DOCTYPE html>
       </div>
     </div>
   </footer>
-          <p>Únete a miles de estudiantes que ya están construyendo su futuro digital.</p>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Enlaces Rápidos</h3>
-          <p><a href="#inicio">Inicio</a></p>
-          <p><a href="HTML/cursos.html">Cursos</a></p>
-          <p><a href="HTML/app.html">Mi Cuenta</a></p>
-          <p><a href="finanzas.html">Plan Financiero</a></p>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Soporte</h3>
-          <p><a href="#">Centro de Ayuda</a></p>
-          <p><a href="#">Contacto</a></p>
-          <p><a href="#">Términos y Condiciones</a></p>
-          <p><a href="#">Política de Privacidad</a></p>
-        </div>
-        
-        <div class="footer-section">
-          <h3>Síguenos</h3>
-          <p><a href="#"><i class="fab fa-facebook"></i> Facebook</a></p>
-          <p><a href="#"><i class="fab fa-twitter"></i> Twitter</a></p>
-          <p><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></p>
-          <p><a href="#"><i class="fab fa-youtube"></i> YouTube</a></p>
-        </div>
-      </div>
-      
-      <div class="footer-bottom">
-        <p>&copy; 2025 EduClick. Todos los derechos reservados.</p>
-      </div>
-    </div>
-  </footer>
 
   <script>
     // Smooth scrolling for navigation links
@@ -990,28 +1991,54 @@ mk<!DOCTYPE html>
     function checkUserAuth() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       const userName = localStorage.getItem('userName');
-      const userType = localStorage.getItem('userType') || 'estudiante';
-      const userRoles = JSON.parse(localStorage.getItem('userRoles') || '["estudiante"]');
-      const authButtons = document.getElementById('auth-buttons');
-      const userMenu = document.getElementById('user-menu');
-      const userNameElement = document.getElementById('user-name');
+      const userEmail = localStorage.getItem('userEmail');
+      const userPicture = localStorage.getItem('userPicture');
       
-      if (isLoggedIn === 'true' && userName) {
-        authButtons.style.display = 'none';
-        userMenu.style.display = 'flex';
+      if (isLoggedIn === 'true' && userName && userEmail) {
+        // Show user profile
+        document.getElementById('auth-buttons').style.display = 'none';
+        document.getElementById('user-menu').style.display = 'flex';
         
-        // Personalizar nombre según el tipo de usuario
+        // Update user name display - use email prefix if userName is not a proper name
         let displayName = userName;
-        if (userType === 'instructor') {
-          displayName += ' (Instructor)';
+        if (userName.includes('@') || userName.length < 3 || /^[a-z0-9_]+$/i.test(userName)) {
+          // If userName looks like an email or username, extract a better display name
+          if (userEmail) {
+            displayName = userEmail.split('@')[0];
+            // Capitalize first letter
+            displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+          }
         }
-        userNameElement.textContent = displayName;
         
-        // Actualizar opciones del dropdown según los roles
+        document.getElementById('user-name').textContent = displayName;
+        
+        // Update dropdown user info
+        document.getElementById('dropdown-user-name').textContent = displayName;
+        document.getElementById('dropdown-user-email').textContent = userEmail;
+        
+        // Update dropdown avatar
+        const dropdownAvatar = document.getElementById('dropdown-avatar');
+        if (userPicture && userPicture !== 'null') {
+          dropdownAvatar.innerHTML = `<img src="${userPicture}" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover;">`;
+        } else {
+          // Show first letter of name as avatar
+          const firstLetter = displayName.charAt(0).toUpperCase();
+          dropdownAvatar.innerHTML = firstLetter;
+        }
+        
+        // Update mobile menu
+        updateMobileMenu();
+        
+        // Update dropdown options based on user roles
+        const userRoles = JSON.parse(localStorage.getItem('userRoles') || '["estudiante"]');
         updateUserDropdownOptions(userRoles);
       } else {
-        authButtons.style.display = 'flex';
-        userMenu.style.display = 'none';
+        // Show auth buttons
+        document.getElementById('auth-buttons').style.display = 'flex';
+        document.getElementById('user-menu').style.display = 'none';
+        
+        // Update mobile menu
+        updateMobileMenu();
       }
     }
 
@@ -1133,7 +2160,7 @@ mk<!DOCTYPE html>
     function updateMobileMenu() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
       const userName = localStorage.getItem('userName');
-      const userType = localStorage.getItem('userType') || 'estudiante';
+      const userEmail = localStorage.getItem('userEmail');
       const userRoles = JSON.parse(localStorage.getItem('userRoles') || '["estudiante"]');
       
       const mobileAuthButtons = document.getElementById('mobile-auth-buttons');
@@ -1145,13 +2172,18 @@ mk<!DOCTYPE html>
         mobileAuthButtons.style.display = 'none';
         mobileUserMenu.style.display = 'block';
         
+        // Update mobile user name display - use better formatting
         let displayName = userName;
-        if (userType === 'instructor') {
-          displayName += ' (Instructor)';
+        if (userName.includes('@') || userName.length < 3 || /^[a-z0-9_]+$/i.test(userName)) {
+          if (userEmail) {
+            displayName = userEmail.split('@')[0];
+            displayName = displayName.charAt(0).toUpperCase() + displayName.slice(1);
+          }
         }
+        
         mobileUserName.textContent = displayName;
         
-        // Mostrar enlaces de instructor si aplica
+        // Show instructor links if user has instructor role
         if (userRoles.includes('instructor')) {
           mobileInstructorLinks.style.display = 'block';
         } else {
@@ -1178,6 +2210,18 @@ mk<!DOCTYPE html>
     // Verificar autenticación cuando se carga la página
     document.addEventListener('DOMContentLoaded', function() {
       checkUserAuth();
+      
+      // Asegurar que los botones de autenticación estén visibles si no hay usuario logueado
+      setTimeout(function() {
+        const isLoggedIn = localStorage.getItem('isLoggedIn');
+        const authButtons = document.getElementById('auth-buttons');
+        const userMenu = document.getElementById('user-menu');
+        
+        if (isLoggedIn !== 'true') {
+          if (authButtons) authButtons.style.display = 'flex';
+          if (userMenu) userMenu.style.display = 'none';
+        }
+      }, 100);
       
       // Cerrar menú móvil al redimensionar ventana
       window.addEventListener('resize', function() {

@@ -385,24 +385,125 @@
       opacity: 0.9;
     }
     
+    /* Empty State Styles */
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      color: #666;
+      background: #f8f9fa;
+      border-radius: 15px;
+      margin: 1rem 0;
+    }
+    
+    .empty-state i {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      color: #ddd;
+    }
+    
+    .empty-state h3 {
+      margin-bottom: 0.5rem;
+      color: #333;
+    }
+    
+    .empty-state p {
+      margin-bottom: 1.5rem;
+      color: #666;
+    }
+    
+    /* Certificate Badge */
+    .certificate-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(45deg, #28a745, #20c997);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+    
+    .certificate-badge i {
+      font-size: 1.1rem;
+    }
+    
+    /* Course Card Enhancements */
+    .course-card {
+      transition: all 0.3s ease;
+    }
+    
+    .course-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    /* Authentication Alert */
+    .auth-alert {
+      background: #fff3cd;
+      border: 1px solid #ffeaa7;
+      color: #856404;
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .auth-alert i {
+      color: #f39c12;
+    }
+    
     /* Responsive */
     @media (max-width: 768px) {
-      .nav-links {
-        display: none;
+      .navbar {
+        padding: 0 1rem;
       }
       
-      .welcome-section {
+      .main-content {
+        padding: 1rem;
+      }
+      
+      .dashboard-header {
         flex-direction: column;
         text-align: center;
-        gap: 1rem;
-      }
-      
-      .welcome-text h1 {
-        font-size: 2rem;
+        gap: 2rem;
       }
       
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .courses-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .quick-actions {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .empty-state {
+        padding: 2rem 1rem;
+      }
+      
+      .empty-state i {
+        font-size: 2.5rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .quick-actions {
+        grid-template-columns: 1fr;
+      }
+      
+      .empty-state {
+        padding: 1.5rem 1rem;
       }
     }
   </style>
@@ -656,14 +757,14 @@
   </main>
 
   <script>
-    // Datos del usuario (simulación)
+    // Datos del usuario (solo para usuarios autenticados)
     let userData = {
-      name: 'Juan Pérez',
-      email: 'juan@email.com',
-      coursesInProgress: 3,
-      coursesCompleted: 5,
-      totalHours: 47,
-      certificates: 2,
+      name: '',
+      email: '',
+      coursesInProgress: 0,
+      coursesCompleted: 0,
+      totalHours: 0,
+      certificates: 0,
       userType: 'estudiante',
       roles: ['estudiante']
     };
@@ -696,19 +797,326 @@
           showInstructorSection();
         }
         
-        // Actualizar estadísticas (datos simulados)
-        document.querySelector('.stat-value').textContent = userData.coursesInProgress;
-        document.querySelectorAll('.stat-value')[1].textContent = userData.coursesCompleted;
-        document.querySelectorAll('.stat-value')[2].textContent = userData.totalHours;
-        document.querySelectorAll('.stat-value')[3].textContent = userData.certificates;
+        // Cargar datos reales del usuario (desde localStorage o API)
+        loadUserProgress();
+      } else {
+        // Si no hay usuario autenticado, redirigir al login
+        window.location.href = 'login.html';
+      }
+    }
+    
+    // Cargar progreso real del usuario
+    function loadUserProgress() {
+      // Obtener datos reales del progreso del usuario
+      const userProgress = JSON.parse(localStorage.getItem('userProgress') || '{}');
+      
+      // Si es un usuario nuevo, inicializar con datos vacíos
+      const defaultProgress = {
+        coursesInProgress: 0,
+        coursesCompleted: 0,
+        totalHours: 0,
+        certificates: 0,
+        enrolledCourses: [],
+        completedCourses: [],
+        certificatesEarned: []
+      };
+      
+      const progress = { ...defaultProgress, ...userProgress };
+      
+      // Actualizar userData con datos reales
+      userData.coursesInProgress = progress.coursesInProgress;
+      userData.coursesCompleted = progress.coursesCompleted;
+      userData.totalHours = progress.totalHours;
+      userData.certificates = progress.certificates;
+      
+      // Actualizar estadísticas en el DOM
+      document.querySelector('.stat-value').textContent = progress.coursesInProgress;
+      document.querySelectorAll('.stat-value')[1].textContent = progress.coursesCompleted;
+      document.querySelectorAll('.stat-value')[2].textContent = progress.totalHours + 'h';
+      document.querySelectorAll('.stat-value')[3].textContent = progress.certificates;
+      
+      // Mostrar mensaje si no hay cursos
+      if (progress.coursesInProgress === 0 && progress.coursesCompleted === 0) {
+        showEmptyState();
+      } else {
+        loadUserCourses(progress);
+      }
+    }
+    
+    // Mostrar estado vacío para usuarios nuevos
+    function showEmptyState() {
+      const coursesInProgressSection = document.querySelector('.courses-grid');
+      const completedCoursesSection = document.querySelectorAll('.courses-grid')[1];
+      
+      if (coursesInProgressSection) {
+        coursesInProgressSection.innerHTML = `
+          <div style="text-align: center; padding: 3rem; color: #666;">
+            <i class="fas fa-book-open" style="font-size: 3rem; margin-bottom: 1rem; color: #ddd;"></i>
+            <h3>Aún no tienes cursos</h3>
+            <p>Explora nuestro catálogo y comienza tu aprendizaje</p>
+            <a href="../HTML/cursos.html" class="btn btn-primary" style="margin-top: 1rem; display: inline-block;">
+              <i class="fas fa-search"></i> Explorar Cursos
+            </a>
+          </div>
+        `;
+      }
+      
+      if (completedCoursesSection) {
+        completedCoursesSection.innerHTML = `
+          <div style="text-align: center; padding: 3rem; color: #666;">
+            <i class="fas fa-trophy" style="font-size: 3rem; margin-bottom: 1rem; color: #ddd;"></i>
+            <h3>No has completado cursos aún</h3>
+            <p>Completa tu primer curso para obtener tu certificado</p>
+          </div>
+        `;
+      }
+    }
+    
+    // Cargar cursos del usuario
+    function loadUserCourses(progress) {
+      // Esta función cargaría los cursos reales del usuario
+      // Por ahora mostrará los cursos basados en el progreso real
+      
+      const coursesInProgressSection = document.querySelector('.courses-grid');
+      const completedCoursesSection = document.querySelectorAll('.courses-grid')[1];
+      
+      if (progress.coursesInProgress > 0 && coursesInProgressSection) {
+        // Mostrar cursos en progreso reales
+        coursesInProgressSection.innerHTML = generateCourseCards(progress.enrolledCourses || [], 'progress');
+      }
+      
+      if (progress.coursesCompleted > 0 && completedCoursesSection) {
+        // Mostrar cursos completados reales
+        completedCoursesSection.innerHTML = generateCourseCards(progress.completedCourses || [], 'completed');
+      }
+    }
+    
+    // Generar tarjetas de cursos
+    function generateCourseCards(courses, type) {
+      if (courses.length === 0) {
+        return `
+          <div style="text-align: center; padding: 2rem; color: #666;">
+            <p>No hay cursos ${type === 'progress' ? 'en progreso' : 'completados'} aún</p>
+          </div>
+        `;
+      }
+      
+      return courses.map(course => `
+        <div class="course-card">
+          <div class="course-image">
+            <i class="${course.icon || 'fas fa-book'}"></i>
+          </div>
+          <div class="course-content">
+            <h3>${course.title}</h3>
+            <p>${course.description}</p>
+            <div class="course-progress">
+              <div class="progress-bar">
+                <div class="progress-fill" style="width: ${course.progress || 0}%"></div>
+              </div>
+              <span>${course.progress || 0}% completado</span>
+            </div>
+            ${type === 'completed' ? 
+              `<div class="certificate-badge">
+                <i class="fas fa-certificate"></i> Certificado obtenido
+              </div>` : 
+              `<a href="${course.url || '#'}" class="btn btn-primary">Continuar</a>`
+            }
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    // Función para inscribirse a un curso (simulación)
+    function enrollInCourse(courseId, courseTitle, courseDescription, courseIcon) {
+      const userProgress = JSON.parse(localStorage.getItem('userProgress') || '{}');
+      
+      // Inicializar si no existe
+      if (!userProgress.enrolledCourses) {
+        userProgress.enrolledCourses = [];
+      }
+      
+      // Verificar si ya está inscrito
+      const alreadyEnrolled = userProgress.enrolledCourses.find(course => course.id === courseId);
+      if (alreadyEnrolled) {
+        alert('Ya estás inscrito en este curso');
+        return;
+      }
+      
+      // Agregar curso
+      const newCourse = {
+        id: courseId,
+        title: courseTitle,
+        description: courseDescription,
+        icon: courseIcon,
+        progress: 0,
+        enrolledDate: new Date().toISOString(),
+        url: `ver curso.html?id=${courseId}`
+      };
+      
+      userProgress.enrolledCourses.push(newCourse);
+      userProgress.coursesInProgress = (userProgress.coursesInProgress || 0) + 1;
+      
+      // Guardar progreso
+      localStorage.setItem('userProgress', JSON.stringify(userProgress));
+      
+      // Recargar datos
+      loadUserProgress();
+      
+      alert(`¡Te has inscrito exitosamente en "${courseTitle}"!`);
+    }
+    
+    // Función para completar un curso y obtener certificado
+    function completeCourse(courseId) {
+      const userProgress = JSON.parse(localStorage.getItem('userProgress') || '{}');
+      
+      // Encontrar el curso en progreso
+      const courseIndex = userProgress.enrolledCourses?.findIndex(course => course.id === courseId);
+      if (courseIndex === -1) {
+        alert('Curso no encontrado');
+        return;
+      }
+      
+      const course = userProgress.enrolledCourses[courseIndex];
+      
+      // Mover a cursos completados
+      if (!userProgress.completedCourses) {
+        userProgress.completedCourses = [];
+      }
+      
+      course.progress = 100;
+      course.completedDate = new Date().toISOString();
+      course.certificateId = `CERT-${Date.now()}-${courseId}`;
+      
+      userProgress.completedCourses.push(course);
+      userProgress.enrolledCourses.splice(courseIndex, 1);
+      
+      // Actualizar estadísticas
+      userProgress.coursesInProgress = Math.max(0, (userProgress.coursesInProgress || 0) - 1);
+      userProgress.coursesCompleted = (userProgress.coursesCompleted || 0) + 1;
+      userProgress.certificates = (userProgress.certificates || 0) + 1;
+      userProgress.totalHours = (userProgress.totalHours || 0) + (course.duration || 25); // Horas por defecto
+      
+      // Agregar certificado
+      if (!userProgress.certificatesEarned) {
+        userProgress.certificatesEarned = [];
+      }
+      
+      userProgress.certificatesEarned.push({
+        id: course.certificateId,
+        courseId: courseId,
+        courseTitle: course.title,
+        earnedDate: course.completedDate,
+        downloadUrl: `certificate.html?id=${course.certificateId}`
+      });
+      
+      // Guardar progreso
+      localStorage.setItem('userProgress', JSON.stringify(userProgress));
+      
+      // Recargar datos
+      loadUserProgress();
+      
+      alert(`¡Felicidades! Has completado "${course.title}" y obtenido tu certificado.`);
+    }
+    
+    // Función para ver certificados
+    function viewCertificates() {
+      const userProgress = JSON.parse(localStorage.getItem('userProgress') || '{}');
+      const certificates = userProgress.certificatesEarned || [];
+      
+      if (certificates.length === 0) {
+        alert('Aún no tienes certificados. Completa un curso para obtener tu primer certificado.');
+        return;
+      }
+      
+      // Crear modal para mostrar certificados
+      const modal = document.createElement('div');
+      modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
+      `;
+      
+      modal.innerHTML = `
+        <div style="
+          background: white;
+          padding: 2rem;
+          border-radius: 15px;
+          max-width: 600px;
+          width: 90%;
+          max-height: 80vh;
+          overflow-y: auto;
+        ">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+            <h2 style="margin: 0; color: #333;">Mis Certificados</h2>
+            <button onclick="closeCertificatesModal()" style="
+              background: none;
+              border: none;
+              font-size: 1.5rem;
+              cursor: pointer;
+              color: #666;
+            ">&times;</button>
+          </div>
+          
+          <div class="certificates-grid" style="display: grid; gap: 1rem;">
+            ${certificates.map(cert => `
+              <div style="
+                border: 2px solid #667eea;
+                border-radius: 10px;
+                padding: 1.5rem;
+                background: linear-gradient(45deg, #f8f9ff, #fff);
+              ">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                  <i class="fas fa-certificate" style="font-size: 2rem; color: #667eea;"></i>
+                  <div>
+                    <h3 style="margin: 0; color: #333;">${cert.courseTitle}</h3>
+                    <p style="margin: 0; color: #666; font-size: 0.9rem;">Obtenido el ${new Date(cert.earnedDate).toLocaleDateString()}</p>
+                  </div>
+                </div>
+                <div style="text-align: center;">
+                  <a href="${cert.downloadUrl}" class="btn btn-primary" style="text-decoration: none; display: inline-block;">
+                    <i class="fas fa-download"></i> Descargar Certificado
+                  </a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+      
+      document.body.appendChild(modal);
+      window.currentCertificatesModal = modal;
+    }
+    
+    // Cerrar modal de certificados
+    function closeCertificatesModal() {
+      if (window.currentCertificatesModal) {
+        document.body.removeChild(window.currentCertificatesModal);
+        window.currentCertificatesModal = null;
+      }
     }
 
     // Cerrar sesión
     function cerrarSesion() {
       if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
-        localStorage.removeItem('userName');
-        localStorage.removeItem('userType');
+        // Limpiar todos los datos del usuario
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userType');
+        localStorage.removeItem('userRoles');
+        localStorage.removeItem('userPicture');
+        localStorage.removeItem('googleUserId');
+        localStorage.removeItem('loginMethod');
+        localStorage.removeItem('userProgress');
+        
+        // Redirigir al login
         window.location.href = 'login.html';
       }
     }
@@ -716,7 +1124,19 @@
     // Verificar si el usuario está logueado
     function checkAuth() {
       const isLoggedIn = localStorage.getItem('isLoggedIn');
-      if (!isLoggedIn) {
+      const userName = localStorage.getItem('userName');
+      const userEmail = localStorage.getItem('userEmail');
+      
+      if (isLoggedIn !== 'true' || !userName || !userEmail) {
+        // Limpiar cualquier dato residual
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userType');
+        localStorage.removeItem('userRoles');
+        
+        // Redirigir al login
+        alert('Debes iniciar sesión para acceder al dashboard');
         window.location.href = 'login.html';
         return false;
       }
