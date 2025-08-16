@@ -508,27 +508,285 @@ mk<!DOCTYPE html>
       color: #888;
     }
     
-    /* Responsive Design */
+    .mobile-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+    }
+    
+    .mobile-overlay.active {
+      display: block;
+    }
+    
+    /* Mobile Menu */
+    .mobile-menu-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #333;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 80%;
+      height: 100vh;
+      background: white;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+      z-index: 1001;
+      transition: left 0.3s ease;
+      padding: 2rem 0;
+    }
+    
+    .mobile-menu.active {
+      left: 0;
+    }
+    
+    .mobile-menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 1rem;
+    }
+    
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      color: #666;
+      cursor: pointer;
+    }
+    
+    .mobile-nav-links {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .mobile-nav-links li {
+      margin: 0;
+    }
+    
+    .mobile-nav-links a {
+      display: block;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      border-bottom: 1px solid #f0f0f0;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-nav-links a:hover {
+      background: #f8f9fa;
+      color: #667eea;
+      padding-left: 2.5rem;
+    }
+    
+    .mobile-auth-buttons {
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    /* Responsive */
     @media (max-width: 768px) {
+      .navbar {
+        padding: 0 1rem;
+      }
+      
       .nav-links {
         display: none;
       }
       
-      .hero h1 {
-        font-size: 2.5rem;
+      .auth-buttons {
+        display: none;
       }
       
-      .hero-subtitle {
+      .mobile-menu-toggle {
+        display: block;
+      }
+      
+      .hero {
+        padding: 6rem 1rem 4rem;
+        text-align: center;
+      }
+      
+      .hero h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+        margin-bottom: 1rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .hero-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+      }
+      
+      .btn-cta {
+        width: 100%;
+        text-align: center;
+        padding: 1rem 2rem;
         font-size: 1.1rem;
       }
       
-      .cta-buttons {
-        flex-direction: column;
-        align-items: center;
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .section {
+        padding: 3rem 0;
       }
       
       .section-title {
         font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .section-subtitle {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .courses-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .course-card {
+        margin: 0;
+      }
+      
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      
+      .stat-card {
+        padding: 1.5rem;
+      }
+      
+      .stat-number {
+        font-size: 2rem;
+      }
+      
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+      
+      .feature-card {
+        text-align: center;
+        padding: 2rem 1rem;
+      }
+      
+      .cta {
+        padding: 3rem 1rem;
+      }
+      
+      .cta h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .cta p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+      
+      .footer-section h3 {
+        margin-bottom: 1rem;
+      }
+      
+      /* User Menu Mobile */
+      .user-menu {
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.5rem;
+      }
+      
+      .user-info {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+      }
+      
+      .user-dropdown {
+        right: 0;
+        left: auto;
+        min-width: 200px;
+      }
+      
+      .user-dropdown a {
+        padding: 0.8rem 1rem;
+        font-size: 0.9rem;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .hero h1 {
+        font-size: 1.8rem;
+      }
+      
+      .hero p {
+        font-size: 0.9rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .stat-card {
+        padding: 1rem;
+      }
+      
+      .course-card {
+        padding: 1rem;
+      }
+      
+      .course-content h3 {
+        font-size: 1.2rem;
+      }
+      
+      .course-content p {
+        font-size: 0.9rem;
+      }
+      
+      .mobile-menu {
+        width: 90%;
+      }
+      
+      .btn-cta {
+        padding: 0.8rem 1.5rem;
+        font-size: 1rem;
       }
     }
   </style>
@@ -547,8 +805,13 @@ mk<!DOCTYPE html>
         <li><a href="#nosotros">Nosotros</a></li>
         <li><a href="finanzas.html">Plan Financiero</a></li>
         <li><a href="simulacion-pagos.html">Pagos</a></li>
-        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="HTML/contacto.html">Contacto</a></li>
       </ul>
+      
+      <!-- Mobile Menu Toggle -->
+      <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fas fa-bars"></i>
+      </button>
       <div class="auth-buttons" id="auth-buttons">
         <a href="HTML/login.html" class="btn btn-outline">Iniciar Sesión</a>
         <a href="HTML/registro.html" class="btn btn-primary">Registrarse</a>
@@ -561,183 +824,109 @@ mk<!DOCTYPE html>
             <i class="fas fa-chevron-down dropdown-arrow"></i>
           </div>
           <div class="user-dropdown" id="user-dropdown">
-            <a href="HTML/app.html" class="dropdown-item">
-              <i class="fas fa-tachometer-alt"></i>
-              Mi Dashboard
-            </a>
-            <a href="HTML/perfil.html" class="dropdown-item">
-              <i class="fas fa-user-edit"></i>
-              Mi Perfil
-            </a>
-            <a href="HTML/cursos.html" class="dropdown-item">
-              <i class="fas fa-book"></i>
-              Mis Cursos
-            </a>
-            <div class="dropdown-divider"></div>
-            <button class="dropdown-item logout-btn" onclick="cerrarSesion()">
-              <i class="fas fa-sign-out-alt"></i>
-              Cerrar Sesión
-            </button>
+            <a href="HTML/app.html"><i class="fas fa-tachometer-alt"></i> Mi Dashboard</a>
+            <a href="#"><i class="fas fa-user"></i> Mi Perfil</a>
+            <a href="#"><i class="fas fa-book"></i> Mis Cursos</a>
           </div>
         </div>
       </div>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero" id="inicio">
-    <div class="hero-content">
-      <h1>Aprende Tecnología de Forma Fácil</h1>
-      <p class="hero-subtitle">
-        Domina las habilidades tecnológicas del futuro con nuestros cursos interactivos y metodología innovadora
-      </p>
-      <div class="cta-buttons">
-        <a href="HTML/cursos.html" class="btn-cta btn-white">
-          <i class="fas fa-play"></i>
-          Explorar Cursos
-        </a>
-        <a href="#nosotros" class="btn-cta btn-transparent">
-          <i class="fas fa-info-circle"></i>
-          Conocer Más
-        </a>
-      </div>
-    </div>
-  </section>
+  <!-- ... -->
 
-  <!-- Features Section -->
-  <section class="features" id="nosotros">
-    <div class="container">
-      <h2 class="section-title">¿Por qué elegir EduClick?</h2>
-      <p class="section-subtitle">
-        Ofrecemos una experiencia de aprendizaje única con metodología probada y tecnología de vanguardia
-      </p>
-      
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-laptop-code"></i>
+  <!-- Mobile Menu -->
+  <div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileMenu()"></div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu-header">
+      <div class="logo">
+        <i class="fas fa-graduation-cap"></i>
+        EduClick
+      </div>
+      <button class="mobile-menu-close" onclick="closeMobileMenu()">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <ul class="mobile-nav-links">
+      <li><a href="#inicio" onclick="closeMobileMenu()">Inicio</a></li>
+      <li><a href="#cursos" onclick="closeMobileMenu()">Cursos</a></li>
+      <li><a href="#nosotros" onclick="closeMobileMenu()">Nosotros</a></li>
+      <li><a href="finanzas.html">Plan Financiero</a></li>
+      <li><a href="simulacion-pagos.html">Pagos</a></li>
+      <li><a href="HTML/contacto.html">Contacto</a></li>
+    </ul>
+    
+    <div class="mobile-auth-buttons" id="mobile-auth-buttons">
+      <a href="HTML/login.html" class="btn btn-outline">Iniciar Sesión</a>
+      <a href="HTML/registro.html" class="btn btn-primary">Registrarse</a>
+    </div>
+    
+    <div class="mobile-user-menu" id="mobile-user-menu" style="display: none;">
+      <div style="padding: 2rem; border-top: 1px solid #eee;">
+        <div style="margin-bottom: 1rem; font-weight: 600; color: #333;" id="mobile-user-name"></div>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+          <a href="HTML/app.html" style="padding: 0.5rem 0; color: #667eea; text-decoration: none;"><i class="fas fa-tachometer-alt"></i> Mi Dashboard</a>
+          <a href="#" style="padding: 0.5rem 0; color: #667eea; text-decoration: none;"><i class="fas fa-user"></i> Mi Perfil</a>
+          <a href="#" style="padding: 0.5rem 0; color: #667eea; text-decoration: none;"><i class="fas fa-book"></i> Mis Cursos</a>
+          <div id="mobile-instructor-links" style="display: none;">
+            <div style="margin: 1rem 0 0.5rem; font-size: 0.8rem; font-weight: 600; color: #667eea; text-transform: uppercase;">Panel de Instructor</div>
+            <a href="#" style="padding: 0.5rem 0; color: #667eea; text-decoration: none;"><i class="fas fa-chalkboard-teacher"></i> Crear Curso</a>
+            <a href="#" style="padding: 0.5rem 0; color: #667eea; text-decoration: none;"><i class="fas fa-chart-line"></i> Analíticas</a>
+            <a href="#" style="padding: 0.5rem 0; color: #667eea; text-decoration: none;"><i class="fas fa-users"></i> Mis Estudiantes</a>
           </div>
-          <h3>Aprendizaje Interactivo</h3>
-          <p>Cursos prácticos con ejercicios reales y proyectos que puedes aplicar inmediatamente en tu trabajo o emprendimiento.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-users"></i>
-          </div>
-          <h3>Comunidad Activa</h3>
-          <p>Conecta con otros estudiantes y profesionales. Comparte experiencias y resuelve dudas en nuestra comunidad.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-certificate"></i>
-          </div>
-          <h3>Certificaciones</h3>
-          <p>Obtén certificados reconocidos por la industria que validen tus nuevas habilidades tecnológicas.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-clock"></i>
-          </div>
-          <h3>Flexibilidad Total</h3>
-          <p>Aprende a tu ritmo, desde cualquier lugar y en cualquier momento. Acceso 24/7 a todo el contenido.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-chalkboard-teacher"></i>
-          </div>
-          <h3>Instructores Expertos</h3>
-          <p>Aprende de profesionales con años de experiencia en la industria tecnológica y educativa.</p>
-        </div>
-        
-        <div class="feature-card">
-          <div class="feature-icon">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
-          <h3>Multiplataforma</h3>
-          <p>Accede desde cualquier dispositivo: computadora, tablet o móvil. Tu progreso se sincroniza automáticamente.</p>
+          <a href="#" onclick="cerrarSesion()" style="padding: 0.5rem 0; color: #dc3545; text-decoration: none; margin-top: 1rem; border-top: 1px solid #eee; padding-top: 1rem;"><i class="fas fa-sign-out-alt"></i> Cerrar Sesión</a>
         </div>
       </div>
     </div>
-  </section>
-
-  <!-- Courses Section -->
-  <section class="courses" id="cursos">
-    <div class="container">
-      <h2 class="section-title">Cursos Destacados</h2>
-      <p class="section-subtitle">
-        Descubre nuestros cursos más populares y comienza tu transformación digital hoy mismo
-      </p>
-      
-      <div class="courses-grid">
-        <div class="course-card">
-          <div class="course-image">
-            <i class="fas fa-code"></i>
-          </div>
-          <div class="course-content">
-            <h3>Programación Web Completa</h3>
-            <p>Aprende HTML, CSS, JavaScript y frameworks modernos para crear sitios web profesionales desde cero.</p>
-            <div class="course-meta">
-              <span><i class="fas fa-clock"></i> 40 horas</span>
-              <span><i class="fas fa-users"></i> 1,234 estudiantes</span>
-            </div>
-            <div class="course-price">$100,000 COP/mes</div>
-            <a href="HTML/ver curso.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">Ver Curso</a>
-          </div>
-        </div>
-        
-        <div class="course-card">
-          <div class="course-image">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <div class="course-content">
-            <h3>Análisis de Datos con Python</h3>
-            <p>Domina Python, pandas, numpy y visualización de datos para tomar decisiones basadas en información.</p>
-            <div class="course-meta">
-              <span><i class="fas fa-clock"></i> 35 horas</span>
-              <span><i class="fas fa-users"></i> 856 estudiantes</span>
-            </div>
-            <div class="course-price">$100,000 COP/mes</div>
-            <a href="HTML/ver curso.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">Ver Curso</a>
-          </div>
-        </div>
-        
-        <div class="course-card">
-          <div class="course-image">
-            <i class="fas fa-mobile-alt"></i>
-          </div>
-          <div class="course-content">
-            <h3>Desarrollo de Apps Móviles</h3>
-            <p>Crea aplicaciones nativas para iOS y Android usando las últimas tecnologías y mejores prácticas.</p>
-            <div class="course-meta">
-              <span><i class="fas fa-clock"></i> 50 horas</span>
-              <span><i class="fas fa-users"></i> 623 estudiantes</span>
-            </div>
-            <div class="course-price">$100,000 COP/mes</div>
-            <a href="HTML/ver curso.html" class="btn btn-primary" style="width: 100%; text-align: center; margin-top: 1rem;">Ver Curso</a>
-          </div>
-        </div>
-      </div>
-      
-      <div style="text-align: center; margin-top: 3rem;">
-        <a href="HTML/cursos.html" class="btn-cta btn-primary">
-          <i class="fas fa-th-large"></i>
-          Ver Todos los Cursos
-        </a>
-      </div>
-    </div>
-  </section>
+  </div>
 
   <!-- Footer -->
-  <footer id="contacto">
+  <footer class="footer">
     <div class="container">
       <div class="footer-content">
         <div class="footer-section">
           <h3>EduClick</h3>
           <p>Transformamos vidas a través de la educación tecnológica accesible y de calidad.</p>
+          <p>Únete a miles de estudiantes que ya están construyendo su futuro digital.</p>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Cursos</h3>
+          <ul>
+            <li><a href="HTML/cursos.html">Programación Web</a></li>
+            <li><a href="HTML/cursos.html">Análisis de Datos</a></li>
+            <li><a href="HTML/cursos.html">Apps Móviles</a></li>
+            <li><a href="HTML/cursos.html">Inteligencia Artificial</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Empresa</h3>
+          <ul>
+            <li><a href="#nosotros">Sobre Nosotros</a></li>
+            <li><a href="HTML/contacto.html">Contacto</a></li>
+            <li><a href="finanzas.html">Plan Financiero</a></li>
+            <li><a href="#">Términos y Condiciones</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Síguenos</h3>
+          <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>&copy; 2025 EduClick. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
           <p>Únete a miles de estudiantes que ya están construyendo su futuro digital.</p>
         </div>
         
@@ -919,6 +1108,61 @@ mk<!DOCTYPE html>
       }
     }
     
+    // Funciones para el menú móvil
+    function toggleMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileOverlay = document.getElementById('mobile-overlay');
+      
+      mobileMenu.classList.add('active');
+      mobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      
+      // Actualizar menú móvil según estado de autenticación
+      updateMobileMenu();
+    }
+    
+    function closeMobileMenu() {
+      const mobileMenu = document.getElementById('mobile-menu');
+      const mobileOverlay = document.getElementById('mobile-overlay');
+      
+      mobileMenu.classList.remove('active');
+      mobileOverlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+    
+    function updateMobileMenu() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userName = localStorage.getItem('userName');
+      const userType = localStorage.getItem('userType') || 'estudiante';
+      const userRoles = JSON.parse(localStorage.getItem('userRoles') || '["estudiante"]');
+      
+      const mobileAuthButtons = document.getElementById('mobile-auth-buttons');
+      const mobileUserMenu = document.getElementById('mobile-user-menu');
+      const mobileUserName = document.getElementById('mobile-user-name');
+      const mobileInstructorLinks = document.getElementById('mobile-instructor-links');
+      
+      if (isLoggedIn === 'true' && userName) {
+        mobileAuthButtons.style.display = 'none';
+        mobileUserMenu.style.display = 'block';
+        
+        let displayName = userName;
+        if (userType === 'instructor') {
+          displayName += ' (Instructor)';
+        }
+        mobileUserName.textContent = displayName;
+        
+        // Mostrar enlaces de instructor si aplica
+        if (userRoles.includes('instructor')) {
+          mobileInstructorLinks.style.display = 'block';
+        } else {
+          mobileInstructorLinks.style.display = 'none';
+        }
+      } else {
+        mobileAuthButtons.style.display = 'flex';
+        mobileUserMenu.style.display = 'none';
+      }
+    }
+    
     // Cerrar dropdown al hacer clic fuera
     document.addEventListener('click', function(event) {
       const userProfileContainer = document.querySelector('.user-profile-container');
@@ -934,6 +1178,13 @@ mk<!DOCTYPE html>
     // Verificar autenticación cuando se carga la página
     document.addEventListener('DOMContentLoaded', function() {
       checkUserAuth();
+      
+      // Cerrar menú móvil al redimensionar ventana
+      window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+          closeMobileMenu();
+        }
+      });
     });
   </script>
 </body>
