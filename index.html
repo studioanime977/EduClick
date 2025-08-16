@@ -123,8 +123,122 @@ mk<!DOCTYPE html>
     }
     
     .btn-primary:hover {
+      background: linear-gradient(45deg, #5a67d8, #6b46c1);
       transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+      box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+    }
+    
+    /* User Menu Styles */
+    .user-menu {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    
+    .user-profile-container {
+      position: relative;
+    }
+    
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      color: white;
+      border-radius: 25px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .user-info:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    }
+    
+    .user-info i {
+      font-size: 1rem;
+    }
+    
+    .dropdown-arrow {
+      font-size: 0.8rem;
+      transition: transform 0.3s ease;
+    }
+    
+    .dropdown-arrow.rotated {
+      transform: rotate(180deg);
+    }
+    
+    .user-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      min-width: 200px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      margin-top: 0.5rem;
+    }
+    
+    .user-dropdown.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    
+    .dropdown-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.2s ease;
+      border: none;
+      background: none;
+      width: 100%;
+      text-align: left;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    
+    .dropdown-item:first-child {
+      border-radius: 10px 10px 0 0;
+    }
+    
+    .dropdown-item:last-child {
+      border-radius: 0 0 10px 10px;
+    }
+    
+    .dropdown-item:hover {
+      background-color: #f8f9fa;
+    }
+    
+    .dropdown-item i {
+      font-size: 1rem;
+      width: 16px;
+      text-align: center;
+    }
+    
+    .dropdown-divider {
+      height: 1px;
+      background-color: #e9ecef;
+      margin: 0.5rem 0;
+    }
+    
+    .logout-btn {
+      color: #dc3545;
+    }
+    
+    .logout-btn:hover {
+      background-color: #f8f9fa;
+      color: #c82333;
     }
     
     /* Hero Section */
@@ -435,9 +549,37 @@ mk<!DOCTYPE html>
         <li><a href="simulacion-pagos.html">Pagos</a></li>
         <li><a href="#contacto">Contacto</a></li>
       </ul>
-      <div class="auth-buttons">
+      <div class="auth-buttons" id="auth-buttons">
         <a href="HTML/login.html" class="btn btn-outline">Iniciar Sesión</a>
         <a href="HTML/registro.html" class="btn btn-primary">Registrarse</a>
+      </div>
+      <div class="user-menu" id="user-menu" style="display: none;">
+        <div class="user-profile-container">
+          <div class="user-info" onclick="toggleUserDropdown()">
+            <i class="fas fa-user"></i>
+            <span id="user-name">Usuario</span>
+            <i class="fas fa-chevron-down dropdown-arrow"></i>
+          </div>
+          <div class="user-dropdown" id="user-dropdown">
+            <a href="HTML/app.html" class="dropdown-item">
+              <i class="fas fa-tachometer-alt"></i>
+              Mi Dashboard
+            </a>
+            <a href="HTML/perfil.html" class="dropdown-item">
+              <i class="fas fa-user-edit"></i>
+              Mi Perfil
+            </a>
+            <a href="HTML/cursos.html" class="dropdown-item">
+              <i class="fas fa-book"></i>
+              Mis Cursos
+            </a>
+            <div class="dropdown-divider"></div>
+            <button class="dropdown-item logout-btn" onclick="cerrarSesion()">
+              <i class="fas fa-sign-out-alt"></i>
+              Cerrar Sesión
+            </button>
+          </div>
+        </div>
       </div>
     </nav>
   </header>
@@ -465,7 +607,7 @@ mk<!DOCTYPE html>
   <!-- Features Section -->
   <section class="features" id="nosotros">
     <div class="container">
-      <h2 class="section-title">¿Por qué elegir EducaClick?</h2>
+      <h2 class="section-title">¿Por qué elegir EduClick?</h2>
       <p class="section-subtitle">
         Ofrecemos una experiencia de aprendizaje única con metodología probada y tecnología de vanguardia
       </p>
@@ -653,6 +795,66 @@ mk<!DOCTYPE html>
       } else {
         header.style.background = 'rgba(255, 255, 255, 0.95)';
       }
+    });
+
+    // Verificar si el usuario está logueado y mostrar su perfil
+    function checkUserAuth() {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const userName = localStorage.getItem('userName');
+      
+      const authButtons = document.getElementById('auth-buttons');
+      const userMenu = document.getElementById('user-menu');
+      const userNameElement = document.getElementById('user-name');
+      
+      if (isLoggedIn === 'true' && userName) {
+        // Usuario logueado - mostrar menú de usuario
+        authButtons.style.display = 'none';
+        userMenu.style.display = 'flex';
+        userNameElement.textContent = userName;
+      } else {
+        // Usuario no logueado - mostrar botones de login/registro
+        authButtons.style.display = 'flex';
+        userMenu.style.display = 'none';
+      }
+    }
+
+    // Función para cerrar sesión
+    function cerrarSesion() {
+      if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
+        localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('userName');
+        localStorage.removeItem('userEmail');
+        localStorage.removeItem('userType');
+        
+        // Recargar la página para actualizar la interfaz
+        window.location.reload();
+      }
+    }
+
+    // Función para mostrar/ocultar el menú desplegable
+    function toggleUserDropdown() {
+      const dropdown = document.getElementById('user-dropdown');
+      const arrow = document.querySelector('.dropdown-arrow');
+      
+      dropdown.classList.toggle('show');
+      arrow.classList.toggle('rotated');
+    }
+
+    // Cerrar dropdown al hacer clic fuera
+    document.addEventListener('click', function(event) {
+      const userProfileContainer = document.querySelector('.user-profile-container');
+      const dropdown = document.getElementById('user-dropdown');
+      const arrow = document.querySelector('.dropdown-arrow');
+      
+      if (userProfileContainer && !userProfileContainer.contains(event.target)) {
+        dropdown.classList.remove('show');
+        arrow.classList.remove('rotated');
+      }
+    });
+
+    // Verificar autenticación cuando se carga la página
+    document.addEventListener('DOMContentLoaded', function() {
+      checkUserAuth();
     });
   </script>
 </body>

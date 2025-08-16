@@ -140,10 +140,16 @@
       const password = document.getElementById("password").value;
 
       if (email && password) {
+        // Guardar información del usuario en localStorage
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('userName', email.split('@')[0]); // Usar parte antes del @
+        localStorage.setItem('userEmail', email);
+        localStorage.setItem('userType', 'estudiante'); // Por defecto estudiante
+        
         mensajeLogin.style.display = "block";
 
         setTimeout(() => {
-          window.location.href = "app.html";
+          window.location.href = "../index.html";
         }, 2000);
       }
     });
