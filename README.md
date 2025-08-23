@@ -75,9 +75,9 @@ EduClick/
 
 | Plan | Mensual | Anual | Descuento | Características |
 |------|---------|-------|-----------|----------------|
-| **Básico** | $80,000 COP | $66,667 COP/mes | 17% | 3 cursos básicos, certificados |
-| **Intermedio** | $100,000 COP | $83,333 COP/mes | 17% | 8 cursos, proyectos prácticos |
-| **Avanzado** | $120,000 COP | $99,600 COP/mes | 17% | Todos los cursos, mentoría |
+| **Básico** | $100,000 COP | $83,333 COP/mes | 17% | 5 cursos básicos, certificados |
+| **Intermedio** | $100,000 COP | $83,333 COP/mes | 17% | 15 cursos, proyectos prácticos |
+| **Avanzado** | $100,000 COP | $83,333 COP/mes | 17% | Todos los 30 cursos, mentoría personalizada |
 
 ### Distribución de Ganancias
 - **60%** para creadores de contenido
